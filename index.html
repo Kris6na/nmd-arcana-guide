@@ -7,158 +7,266 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="brand">
-        <span class="badge-pill">HIGH-TIER (4-RUNE)</span>
-        <h1>Ninja Must Die: Arcana Guide</h1>
-        <p class="subtitle">Complete reference for 4SE farming, Rune upgrade milestones, stat caps, and all 5 High-Tier Arcana Sets.</p>
-      </div>
-      <nav class="top-nav" aria-label="Section Navigation">
-        <a href="#basics">1. Basics &amp; 4SE</a>
-        <a href="#milestones">2. Milestones</a>
-        <a href="#sets">3. The 5 Sets</a>
-        <a href="#common-effects">4. Common Effects</a>
-        <a href="#interactions">5. Battle Rules</a>
-      </nav>
+  <!-- Floating Side-Dock Toggle Button (Zero top-screen waste) -->
+  <button
+    id="dock-toggle"
+    class="dock-toggle"
+    type="button"
+    aria-label="Toggle Table of Contents"
+    aria-expanded="false"
+    aria-controls="side-dock"
+  >
+    <span class="dock-toggle-icon" aria-hidden="true">&#9776;</span>
+    <span class="dock-toggle-label">Index</span>
+  </button>
+
+  <!-- Backdrop for mobile drawer -->
+  <div id="dock-backdrop" class="dock-backdrop" hidden></div>
+
+  <!-- Collapsible Side Dock for Indexing -->
+  <aside id="side-dock" class="side-dock" aria-label="Guide Index">
+    <div class="dock-header">
+      <span class="dock-title">Contents</span>
+      <button id="dock-close" class="dock-close" type="button" aria-label="Close Index">&times;</button>
     </div>
-  </header>
 
-  <main class="container">
-    <!-- Scope Callout -->
-    <section class="callout-grid" aria-label="Guide Scope">
-      <div class="card callout-info">
-        <h2>Scope of This Guide</h2>
-        <p>Covers <strong>High-Tier (4-Rune)</strong> Arcana Sets exclusively. Low-Tier (2-Rune) and Mid-Tier (3-Rune / 4-Rune) sets are excluded, as are unverified RNG hypotheses.</p>
+    <nav class="dock-nav">
+      <a href="#overview" class="dock-link">Overview &amp; Scope</a>
+      <a href="#basics" class="dock-link">1. System Basics &amp; 4SE</a>
+      <div class="dock-sublist">
+        <a href="#tiers" class="dock-sublink">Arcana Tiers</a>
+        <a href="#farming" class="dock-sublink">4SE Portal Farming</a>
+        <a href="#activation" class="dock-sublink">Activation Rules</a>
       </div>
-      <div class="card callout-warn">
-        <h2>Tier Mixing Warning</h2>
-        <p><em>Divine Blessing</em> exists in both <strong>Mid-Tier</strong> (+30 to +300 Element ATK) and <strong>High-Tier</strong> (+50 to +500 Element ATK). Never mix tiers or the Set Skill will not activate.</p>
-      </div>
-    </section>
 
-    <!-- Section 1: Basics & 4SE -->
-    <section id="basics" class="guide-section">
-      <div class="section-header">
-        <span class="section-num">01</span>
-        <h2>Arcana System Basics &amp; 4SE Farming</h2>
+      <a href="#milestones" class="dock-link">2. Rune Milestones</a>
+      <div class="dock-sublist">
+        <a href="#base-stats" class="dock-sublink">Base Stats (Lv. 1–10)</a>
+        <a href="#rune-effects" class="dock-sublink">Rune Effects (Lv. 1 &amp; 5)</a>
+        <a href="#level-inspector" class="dock-sublink">Level Inspector</a>
       </div>
-      <div class="grid-2">
-        <div class="card">
-          <h3>Activating a High-Tier Set</h3>
-          <ul class="clean-list">
-            <li><strong>4-Element Match:</strong> Equip <strong>4 High-Tier Runes of the exact same set name</strong>—one from each element (<span class="el-tag el-wind">Wind</span>, <span class="el-tag el-lightning">Lightning</span>, <span class="el-tag el-water">Water</span>, <span class="el-tag el-fire">Fire</span>).</li>
-            <li><strong>Ninja Element Lock:</strong> The 4 offensive sets require deploying a <strong>Ninja of the matching element</strong>. <em>Divine Blessing</em> works with <strong>any Ninja</strong>.</li>
-            <li><strong>Default Trigger Limit:</strong> Every Set Skill triggers <strong>once per battle</strong> by default unless extended by a Wind or Lightning Special Effect.</li>
+
+      <a href="#sets" class="dock-link">3. The 5 High-Tier Sets</a>
+      <div class="dock-sublist">
+        <a href="#set-kamaitachi" class="dock-sublink">Kamaitachi (Wind)</a>
+        <a href="#set-beast-bull" class="dock-sublink">Beast Bull (Lightning)</a>
+        <a href="#set-blowfish" class="dock-sublink">Blowfish (Water)</a>
+        <a href="#set-candle-dragon" class="dock-sublink">Candle Dragon (Fire)</a>
+        <a href="#set-divine-blessing" class="dock-sublink">Divine Blessing (Any)</a>
+      </div>
+
+      <a href="#common-effects" class="dock-link">4. Common Effects &amp; Caps</a>
+      <a href="#interactions" class="dock-link">5. Battle &amp; Relay Rules</a>
+    </nav>
+  </aside>
+
+  <!-- Main Article Flow -->
+  <div class="page-wrapper">
+    <article class="article-container">
+      <!-- Non-sticky, clean editorial header -->
+      <header id="overview" class="article-header">
+        <p class="eyebrow">Ninja Must Die &bull; Reference Guide</p>
+        <h1>High-Tier Arcana System Guide</h1>
+        <p class="lead">
+          A complete breakdown of <strong>High-Tier (4-Rune)</strong> Arcana sets—covering weekly 4SE portal farming, Rune upgrade milestones from Lv. 1 to Lv. 10, battle stacking limits, and full elemental pools for all five sets.
+        </p>
+
+        <div class="scope-box">
+          <h3>Guide Scope &amp; Exclusions</h3>
+          <ul class="indented-list">
+            <li>
+              <strong>Included:</strong> Verified mechanics, stat pools, roll ranges, and battle caps for all <strong>5 High-Tier (4-Rune) Arcana Sets</strong>.
+            </li>
+            <li>
+              <strong>Unavailable / Excluded:</strong> Low-Tier (2-Rune) and Mid-Tier (3-Rune / 4-Rune) Arcana sets are not covered here. Unconfirmed RNG hypotheses and subjective tier lists are also excluded.
+            </li>
           </ul>
         </div>
-        <div class="card">
-          <h3>Weekly Rune Farming (4SE)</h3>
-          <ul class="clean-list">
-            <li><strong>Rotating Portals:</strong> Each week, the weekly mode <strong>4SE</strong> opens <strong>2 elemental portals</strong> rotating among Wind, Lightning, Water, and Fire.</li>
-            <li><strong>Element Entry Rule:</strong> You must enter each portal using <strong>Ninjas of the matching element</strong> to defeat its bosses and farm Runes of that element.</li>
-            <li><strong>RNG Rolls:</strong> All Rune Effect values and Lv. 8 Secondary Base Stat values are RNG-generated within fixed ranges.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+      </header>
 
-    <!-- Section 2: Milestones + Interactive Level Preview -->
-    <section id="milestones" class="guide-section">
-      <div class="section-header">
-        <span class="section-num">02</span>
-        <h2>Rune Anatomy &amp; Upgrade Milestones</h2>
-      </div>
+      <!-- SECTION 1 -->
+      <section id="basics" class="article-section">
+        <h2>1. How the Arcana System Works</h2>
+        <p>
+          Arcana is a battle buff system built around <strong>4 Rune slots</strong>. Understanding how tiers, weekly farming portals, and set activation rules interact prevents wasted upgrade materials early on.
+        </p>
 
-      <div class="card simulator-card">
-        <div class="sim-top">
-          <div>
-            <h3>Interactive Rune Level Inspector</h3>
-            <p class="muted">Slide from Lv. 1 to Lv. 10 to see what unlocks at each milestone.</p>
+        <h3 id="tiers">Arcana Tiers</h3>
+        <ul class="indented-list">
+          <li>
+            <strong>Low-Tier Sets:</strong> Require <strong>2 Runes</strong> to activate <em>(excluded from this guide)</em>.
+          </li>
+          <li>
+            <strong>Mid-Tier Sets:</strong> Require <strong>3 Runes</strong> to activate, except Mid-Tier <em>Divine Blessing</em> which requires <strong>4 Runes</strong> <em>(excluded from this guide)</em>.
+          </li>
+          <li>
+            <strong>High-Tier Sets:</strong> Require <strong>4 Runes</strong> to activate and are the sole focus of this guide.
+          </li>
+        </ul>
+
+        <h3 id="farming">Weekly Rune Farming (4SE)</h3>
+        <ul class="indented-list">
+          <li>
+            <strong>Weekly Mode:</strong> High-Tier Runes drop from the weekly battle mode <strong>4SE</strong>.
+          </li>
+          <li>
+            <strong>Rotating Elemental Portals:</strong> Each week, 4SE opens <strong>2 portals</strong>, each dedicated to <strong>1 of the 4 elements</strong> (<span class="el-text wind">Wind</span>, <span class="el-text lightning">Lightning</span>, <span class="el-text water">Water</span>, or <span class="el-text fire">Fire</span>).
+          </li>
+          <li>
+            <strong>Portal Entry Restriction:</strong> You must enter each portal using <strong>Ninjas of the matching element</strong>. Defeating the portal's bosses drops Runes of that specific element.
+          </li>
+        </ul>
+
+        <h3 id="activation">Activating a High-Tier Set</h3>
+        <ul class="indented-list">
+          <li>
+            <strong>4-Element Match:</strong> Equip <strong>4 High-Tier Runes of the exact same set name</strong>—one from each element (<span class="el-text wind">Wind</span>, <span class="el-text lightning">Lightning</span>, <span class="el-text water">Water</span>, and <span class="el-text fire">Fire</span>).
+            <ul class="indented-sublist">
+              <li>Mixing Runes from different sets prevents the Arcana Set Skill from activating at all.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Ninja Element Lock:</strong> The 4 offensive sets require deploying a <strong>Ninja of the matching element</strong>, whereas <em>Divine Blessing</em> works with <strong>any Ninja</strong>.
+          </li>
+          <li>
+            <strong>Default Trigger Limit:</strong> Every Set Skill triggers <strong>once per battle</strong> by default unless extended by a Wind or Lightning Special Effect.
+          </li>
+        </ul>
+
+        <aside class="callout-warning">
+          <strong>Tier Mixing Warning:</strong> <em>Divine Blessing</em> exists in both a <strong>Mid-Tier</strong> version (+30 to +300 Element ATK) and a <strong>High-Tier</strong> version (+50 to +500 Element ATK). Never mix Mid-Tier and High-Tier Runes, or the set will not activate.
+        </aside>
+      </section>
+
+      <!-- SECTION 2 -->
+      <section id="milestones" class="article-section">
+        <h2>2. Rune Anatomy &amp; Upgrade Milestones (Lv. 1 – Lv. 10)</h2>
+        <p>
+          Every High-Tier Rune is divided into <strong>Base Stats</strong> (always active from the start of battle) and <strong>Rune Effects</strong> (dormant until your Arcana Set triggers for the <strong>first time</strong> in battle). All Rune Effect values and Lv. 8 Secondary Base Stat values are RNG-generated within fixed ranges.
+        </p>
+
+        <h3 id="base-stats">Base Stats <span class="tag tag-active">Active from Battle Start</span></h3>
+        <ul class="indented-list">
+          <li>
+            <strong>Primary Base Stat (Lv. 1 – Lv. 10):</strong>
+            <ul class="indented-sublist">
+              <li>Fixed <code>[Element] Element ATK</code> starting at <strong>+50</strong> at Lv. 1.</li>
+              <li>Scales by <strong>+50 per level</strong> up to <strong>+500 at Lv. 10</strong> (+2,000 total Element ATK across 4 maxed Runes).</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Secondary Base Stat (Unlocks at Lv. 8):</strong>
+            <ul class="indented-sublist">
+              <li>Unlocks 1 permanent passive stat drawn randomly from a <strong>6-stat pool</strong>: <strong>Raw ATK</strong>, <strong>Weapon ATK</strong>, <strong>Ninjutsu ATK</strong>, <strong>Max HP</strong>, <strong>Effect Resistance (<code>Effect %</code>)</strong>, or <strong>Score Bonus (<code>Score Bonus %</code>)</strong>.</li>
+              <li>Remains <strong>fixed at its initial Lv. 8 roll</strong> when upgrading further to Lv. 9–10.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3 id="rune-effects">Rune Effects <span class="tag tag-dormant">Dormant Until 1st Set Trigger</span></h3>
+        <ul class="indented-list">
+          <li>
+            <strong>Effect Slot 1 (Unlocked at Lv. 1):</strong>
+            <ul class="indented-sublist">
+              <li>Rolls either that element's <strong>Special Effect</strong> OR a <strong>Common Effect</strong> from that Set &times; Element pool.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Effect Slot 2 (Unlocked at Lv. 5):</strong>
+            <ul class="indented-sublist">
+              <li>Unlocks a second effect line drawn strictly from the <strong>Common Effect pool</strong> (never a Special Effect).</li>
+              <li>Uses the exact same RNG roll range as Lv. 1 and <strong>can duplicate</strong> Slot 1's Common Effect.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <!-- Compact, cleanly spaced Level Inspector -->
+        <div id="level-inspector" class="inspector-box">
+          <div class="inspector-header">
+            <div>
+              <h4>Interactive Milestone Preview</h4>
+              <p class="inspector-sub">Drag the slider to check what unlocks at each Rune level.</p>
+            </div>
+            <div class="inspector-control">
+              <label for="rune-level-slider">Level: <strong id="rune-level-display">Lv. 1</strong></label>
+              <input type="range" id="rune-level-slider" min="1" max="10" value="1" />
+            </div>
           </div>
-          <div class="sim-controls">
-            <label for="rune-level-slider">Rune Level: <strong id="rune-level-display">Lv. 1</strong></label>
-            <input type="range" id="rune-level-slider" min="1" max="10" value="1" />
-          </div>
+          <div id="sim-output" class="inspector-body"></div>
         </div>
-        <div id="sim-output" class="sim-grid"></div>
-      </div>
+      </section>
 
-      <div class="grid-2">
-        <div class="card">
-          <h3>Base Stats <span class="status-badge active-now">Active from Battle Start</span></h3>
-          <ul class="clean-list">
-            <li><strong>Primary Base Stat (Lv. 1–10):</strong> Fixed <code>[Element] Element ATK</code> starting at <strong>+50</strong>, scaling by <strong>+50 per level</strong> up to <strong>+500 at Lv. 10</strong> (+2,000 total across 4 maxed Runes).</li>
-            <li><strong>Secondary Base Stat (Lv. 8):</strong> Unlocks 1 permanent passive stat from a 6-stat pool: <strong>Raw ATK</strong>, <strong>Weapon ATK</strong>, <strong>Ninjutsu ATK</strong>, <strong>Max HP</strong>, <strong>Effect Resistance (<code>Effect %</code>)</strong>, or <strong>Score Bonus (<code>Score Bonus %</code>)</strong>. Remains fixed at its Lv. 8 roll through Lv. 9–10.</li>
-          </ul>
+      <!-- SECTION 3 -->
+      <section id="sets" class="article-section">
+        <h2>3. The 5 High-Tier Arcana Sets</h2>
+        <p>
+          Each High-Tier set has a unique trigger condition, Set Skill behavior, and 4 elemental Rune pools. Every Rune draws from its element's <strong>Lv. 1 Special Effect</strong> alongside its <strong>Damage</strong> and <strong>Regular / Filler</strong> Common Effect pools.
+        </p>
+
+        <div class="set-filter-bar" role="tablist" aria-label="Filter Arcana Sets">
+          <button class="set-tab active" data-set="all">Show All (5)</button>
+          <button class="set-tab" data-set="kamaitachi">Kamaitachi</button>
+          <button class="set-tab" data-set="beast-bull">Beast Bull</button>
+          <button class="set-tab" data-set="blowfish">Blowfish</button>
+          <button class="set-tab" data-set="candle-dragon">Candle Dragon</button>
+          <button class="set-tab" data-set="divine-blessing">Divine Blessing</button>
         </div>
-        <div class="card">
-          <h3>Rune Effects <span class="status-badge dormant">Dormant Until 1st Set Trigger</span></h3>
-          <ul class="clean-list">
-            <li><strong>Effect Slot 1 (Lv. 1):</strong> Rolls either that element's <strong>Special Effect</strong> OR a <strong>Common Effect</strong> from that Set &times; Element pool.</li>
-            <li><strong>Effect Slot 2 (Lv. 5):</strong> Unlocks a second line drawn strictly from the <strong>Common Effect pool</strong> (never a Special Effect). Uses the exact same RNG range as Lv. 1 and can duplicate Slot 1's Common Effect.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
 
-    <!-- Section 3: The 5 High-Tier Arcana Sets -->
-    <section id="sets" class="guide-section">
-      <div class="section-header">
-        <span class="section-num">03</span>
-        <h2>The 5 High-Tier Arcana Sets</h2>
-      </div>
+        <div id="sets-container" class="sets-article-flow"></div>
+      </section>
 
-      <div class="filter-bar" role="tablist" aria-label="Filter Arcana Sets">
-        <button class="filter-btn active" data-set="all">All Sets (5)</button>
-        <button class="filter-btn" data-set="kamaitachi">Kamaitachi</button>
-        <button class="filter-btn" data-set="beast-bull">Beast Bull</button>
-        <button class="filter-btn" data-set="blowfish">Blowfish</button>
-        <button class="filter-btn" data-set="candle-dragon">Candle Dragon</button>
-        <button class="filter-btn" data-set="divine-blessing">Divine Blessing</button>
-      </div>
+      <!-- SECTION 4 -->
+      <section id="common-effects" class="article-section">
+        <h2>4. Common Effects &amp; Set-Wide Caps</h2>
+        <p>
+          Common Effects can roll in either <strong>Slot 1 (Lv. 1)</strong> or <strong>Slot 2 (Lv. 5)</strong>. Each element's Common pool consists of <strong>1 Element-Exclusive Multiplier/ATK stat</strong> plus <strong>4 Universal Cross-Element Utility stats</strong>.
+        </p>
+        <div id="common-effects-container" class="common-article-flow"></div>
+      </section>
 
-      <div id="sets-container" class="sets-stack"></div>
-    </section>
+      <!-- SECTION 5 -->
+      <section id="interactions" class="article-section">
+        <h2>5. Battle &amp; Relay Interactions</h2>
+        <p>
+          Bonus triggers from Wind and Lightning Special Effects interact with your set countdown timer and Common Effects in specific ways:
+        </p>
 
-    <!-- Section 4: Common Effects & Accumulation Limits -->
-    <section id="common-effects" class="guide-section">
-      <div class="section-header">
-        <span class="section-num">04</span>
-        <h2>Common Effects &amp; Set-Wide Caps</h2>
-      </div>
-      <p class="section-intro">Every High-Tier Rune draws its Common Effects from a 5-stat pool per element: <strong>1 Element-Exclusive Multiplier/ATK stat</strong> + <strong>4 Universal Cross-Element Utility stats</strong>.</p>
-      <div id="common-effects-container" class="grid-3"></div>
-    </section>
+        <h3>First Relay Activation &amp; Timer Reset</h3>
+        <ul class="indented-list">
+          <li>
+            Relaying into your 2nd Ninja with Lightning's <strong>Activation on Relay</strong> fires the Set Skill immediately and activates <strong>all</strong> Common Effects (including Permanent ATK).
+          </li>
+          <li>
+            Simultaneously, it <strong>resets your normal set countdown timer to 100%</strong>, keeping your regular scheduled trigger available later in the battle.
+          </li>
+        </ul>
 
-    <!-- Section 5: Battle Interactions -->
-    <section id="interactions" class="guide-section">
-      <div class="section-header">
-        <span class="section-num">05</span>
-        <h2>Relay &amp; Bonus Activation Rules</h2>
-      </div>
-      <div class="grid-3">
-        <div class="card">
-          <h3>First Relay Timer Reset</h3>
-          <p>Relaying into your 2nd Ninja with Lightning's <strong>First Relay Activation</strong> fires the Set Skill immediately, turns on all Common Effects (including Permanent ATK), and <strong>resets your normal countdown timer to 100%</strong> so your regular trigger remains available later.</p>
-        </div>
-        <div class="card">
-          <h3>Relay Limit in Boss Fights</h3>
-          <p>Standard Boss battles allow <strong>1 relay</strong>. Special ultra-high-HP Boss events allow up to <strong>2 relays</strong>—the 2nd relay grants <strong>no</strong> relay activation bonus and simply continues the running timer.</p>
-        </div>
-        <div class="card">
-          <h3>Bonus Activation Re-Triggers</h3>
-          <p>When Wind (<strong>+1 Activation</strong>) or Lightning (<strong>First Relay</strong>) triggers the set again, all Common Effects re-trigger (healing again and refreshing/stacking 10s buffs up to caps)—<strong>except Permanent ATK</strong>, which stays at 1 stack per line for the entire battle.</p>
-        </div>
-      </div>
-    </section>
-  </main>
+        <h3>Relay Limit in Boss Battles</h3>
+        <ul class="indented-list">
+          <li>
+            <strong>Standard Boss Fights:</strong> Allow <strong>1 relay</strong>.
+          </li>
+          <li>
+            <strong>Ultra-High-HP Boss Events:</strong> Allow up to <strong>2 relays</strong>—the 2nd relay grants <strong>no</strong> relay activation bonus and simply continues the running countdown timer.
+          </li>
+        </ul>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>Ninja Must Die: High-Tier Arcana System Guide &bull; Easy-to-edit static site ready for GitHub Pages</p>
-    </div>
-  </footer>
+        <h3>Bonus Activation Re-Triggers</h3>
+        <ul class="indented-list">
+          <li>
+            When Wind (<strong>Additional Activation +1</strong>) or Lightning (<strong>Activation on Relay</strong>) triggers the set again, <strong>all Common Effects re-trigger</strong>—healing again and refreshing or stacking 10s buffs up to their set-wide caps.
+          </li>
+          <li>
+            <strong>Permanent ATK Exception:</strong> <strong>Permanent ATK Increase</strong> does <strong>not</strong> re-stack on bonus activations; it remains at 1 stack per equipped effect line for the rest of the battle.
+          </li>
+        </ul>
+      </section>
+
+      <footer class="article-footer">
+        <p>Ninja Must Die: High-Tier Arcana System Guide &bull; Modular static repository for GitHub Pages</p>
+      </footer>
+    </article>
+  </div>
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
