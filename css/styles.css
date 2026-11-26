@@ -1,30 +1,31 @@
 /* =========================================================
-   Ninja Must Die: Arcana Guide — Mobile-First Stylesheet
-   Edit CSS variables below to customize colors & spacing
+   Ninja Must Die: Arcana Guide — Editorial Article Layout
+   - Zero sticky top header (saves mobile viewport height)
+   - Collapsible side dock for fast indexing
+   - Generous line height, paragraph rhythm & clear indentation
    ========================================================= */
+
 :root {
-  --bg: #0f1117;
-  --surface: #171a23;
-  --surface-alt: #1e222e;
-  --border: #2a2f3f;
-  --text: #eef1f8;
-  --text-muted: #9aa4b8;
-  --accent: #6c8cff;
+  --bg: #111319;
+  --surface: #181b24;
+  --surface-subtle: #1e222d;
+  --border: #2a2f3d;
+  --indent-guide: #32394b;
+
+  --text: #edf0f7;
+  --text-secondary: #c3cad9;
+  --text-muted: #8f98ad;
+  --accent: #7aa2ff;
 
   /* Element Colors */
-  --wind: #2ecc71;
-  --wind-bg: rgba(46, 204, 113, 0.14);
-  --lightning: #f1c40f;
-  --lightning-bg: rgba(241, 196, 15, 0.14);
-  --water: #3498db;
-  --water-bg: rgba(52, 152, 219, 0.14);
-  --fire: #e74c3c;
-  --fire-bg: rgba(231, 76, 60, 0.14);
-  --universal: #b388ff;
-  --universal-bg: rgba(179, 136, 255, 0.14);
+  --wind: #3dd68c;
+  --lightning: #f5c842;
+  --water: #4da6ff;
+  --fire: #ff6b6b;
+  --universal: #c49bff;
 
-  --radius: 12px;
-  --shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  --dock-width: 260px;
+  --content-max: 760px;
 }
 
 * {
@@ -35,402 +36,531 @@
 
 html {
   scroll-behavior: smooth;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
-  background-color: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
   font-size: 16px;
 }
 
-.container {
-  width: 100%;
-  max-width: 1040px;
-  margin: 0 auto;
-  padding: 0 16px;
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Header & Navigation */
-.site-header {
-  background: linear-gradient(180deg, #161b29 0%, var(--bg) 100%);
-  border-bottom: 1px solid var(--border);
-  padding: 24px 0 16px;
-  position: sticky;
+/* =========================================================
+   1. Collapsible Side Dock & Floating Toggle
+   ========================================================= */
+.dock-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface-subtle);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.dock-toggle:hover {
+  border-color: var(--accent);
+}
+
+.dock-toggle:active {
+  transform: scale(0.97);
+}
+
+.dock-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 10, 15, 0.65);
+  z-index: 95;
+  backdrop-filter: blur(2px);
+}
+
+.side-dock {
+  position: fixed;
   top: 0;
-  z-index: 50;
-  backdrop-filter: blur(10px);
+  left: 0;
+  bottom: 0;
+  width: var(--dock-width);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.badge-pill {
-  display: inline-block;
-  font-size: 0.72rem;
+.side-dock.open {
+  transform: translateX(0);
+}
+
+.dock-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.dock-title {
+  font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  padding: 3px 10px;
-  border-radius: 999px;
-  background: rgba(108, 140, 255, 0.18);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.dock-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 6px;
+}
+
+.dock-close:hover {
+  color: var(--text);
+}
+
+.dock-nav {
+  padding: 16px 14px 32px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dock-link {
+  display: block;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 7px 10px;
+  border-radius: 6px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.dock-link:hover,
+.dock-link.active {
+  background: rgba(122, 162, 255, 0.12);
+  color: var(--accent);
+}
+
+.dock-sublist {
+  display: flex;
+  flex-direction: column;
+  margin-left: 14px;
+  padding-left: 10px;
+  border-left: 1px solid var(--indent-guide);
+  margin-bottom: 6px;
+}
+
+.dock-sublink {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.84rem;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+
+.dock-sublink:hover {
+  color: var(--text);
+}
+
+/* =========================================================
+   2. Article Container & Typography Hierarchy
+   ========================================================= */
+.page-wrapper {
+  width: 100%;
+  padding: 28px 20px 80px;
+  transition: padding-left 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.article-container {
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+.article-header {
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 36px;
+}
+
+.eyebrow {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 8px;
 }
 
-.site-header h1 {
-  font-size: 1.5rem;
+.article-header h1 {
+  font-size: 1.85rem;
   line-height: 1.25;
-  margin-bottom: 6px;
-}
-
-.subtitle {
-  color: var(--text-muted);
-  font-size: 0.92rem;
   margin-bottom: 14px;
+  letter-spacing: -0.015em;
 }
 
-.top-nav {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding-bottom: 4px;
-  scrollbar-width: none;
-}
-
-.top-nav::-webkit-scrollbar {
-  display: none;
-}
-
-.top-nav a {
-  flex: 0 0 auto;
-  text-decoration: none;
-  color: var(--text-muted);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-size: 0.84rem;
-  font-weight: 600;
-  transition: all 0.15s ease;
-}
-
-.top-nav a:hover,
-.top-nav a:focus {
-  color: var(--text);
-  border-color: var(--accent);
-}
-
-/* Sections & Cards */
-.guide-section {
-  padding: 28px 0 8px;
-}
-
-.section-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-
-.section-num {
-  font-size: 0.8rem;
-  font-weight: 800;
-  color: var(--accent);
-  background: rgba(108, 140, 255, 0.15);
-  padding: 4px 9px;
-  border-radius: 6px;
-}
-
-.section-header h2 {
-  font-size: 1.28rem;
-}
-
-.section-intro {
-  color: var(--text-muted);
-  margin-bottom: 16px;
-  font-size: 0.95rem;
-}
-
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px;
-  box-shadow: var(--shadow);
-}
-
-.card h3 {
+.lead {
   font-size: 1.05rem;
+  color: var(--text-secondary);
+  margin-bottom: 22px;
+}
+
+.scope-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+
+.scope-box h3 {
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+/* Sections & Headings */
+.article-section {
+  margin-bottom: 48px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--border);
+}
+
+.article-section:last-of-type {
+  border-bottom: none;
+}
+
+.article-section h2 {
+  font-size: 1.45rem;
+  line-height: 1.3;
+  margin-bottom: 14px;
+  color: var(--text);
+  scroll-margin-top: 24px;
+}
+
+.article-section h3 {
+  font-size: 1.12rem;
+  line-height: 1.4;
+  margin-top: 26px;
   margin-bottom: 10px;
+  color: var(--text);
   display: flex;
   align-items: center;
-  justify-content: space-between;
   flex-wrap: wrap;
   gap: 8px;
+  scroll-margin-top: 24px;
 }
 
-.callout-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  margin-top: 20px;
+.article-section h4 {
+  font-size: 0.98rem;
+  line-height: 1.4;
+  margin-top: 18px;
+  margin-bottom: 8px;
+  color: var(--text);
 }
 
-.callout-info {
-  border-left: 4px solid var(--accent);
+p {
+  margin-bottom: 16px;
+  color: var(--text-secondary);
 }
 
-.callout-warn {
-  border-left: 4px solid var(--lightning);
-}
-
-.grid-2,
-.grid-3 {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
-}
-
-.clean-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.clean-list li {
-  padding-left: 14px;
-  position: relative;
-  font-size: 0.94rem;
-}
-
-.clean-list li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: var(--accent);
-  font-weight: bold;
+strong {
+  color: var(--text);
+  font-weight: 600;
 }
 
 code {
-  background: var(--surface-alt);
-  padding: 2px 6px;
-  border-radius: 5px;
-  font-size: 0.85em;
-  color: #cdd6f4;
+  background: var(--surface-subtle);
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.88em;
+  color: #d6e0ff;
 }
 
-/* Status & Element Badges */
-.status-badge {
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 3px 8px;
-  border-radius: 6px;
-}
-
-.active-now {
-  background: var(--wind-bg);
-  color: var(--wind);
-}
-
-.dormant {
-  background: var(--lightning-bg);
-  color: var(--lightning);
-}
-
-.el-tag {
-  display: inline-block;
-  font-size: 0.78rem;
-  font-weight: 700;
-  padding: 1px 7px;
-  border-radius: 5px;
-}
-
-.el-wind { background: var(--wind-bg); color: var(--wind); }
-.el-lightning { background: var(--lightning-bg); color: var(--lightning); }
-.el-water { background: var(--water-bg); color: var(--water); }
-.el-fire { background: var(--fire-bg); color: var(--fire); }
-.el-universal { background: var(--universal-bg); color: var(--universal); }
-
-/* Interactive Simulator */
-.simulator-card {
+/* =========================================================
+   3. Proper Indentation & Nested Lists
+   ========================================================= */
+.indented-list {
+  list-style-type: disc;
+  padding-left: 1.5rem;
   margin-bottom: 16px;
-  border-color: rgba(108, 140, 255, 0.35);
-}
-
-.sim-top {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 14px;
+  gap: 10px;
+  color: var(--text-secondary);
 }
 
-.muted {
-  color: var(--text-muted);
-  font-size: 0.88rem;
-}
-
-.sim-controls {
+.indented-sublist {
+  list-style-type: circle;
+  margin-top: 8px;
+  margin-left: 0.25rem;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--indent-guide);
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.sim-controls input[type="range"] {
+.callout-warning {
+  margin-top: 22px;
+  padding: 14px 18px;
+  background: rgba(245, 200, 66, 0.08);
+  border-left: 3px solid var(--lightning);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 0.96rem;
+}
+
+/* Inline Status & Element Highlights */
+.tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.tag-active {
+  background: rgba(61, 214, 140, 0.14);
+  color: var(--wind);
+}
+
+.tag-dormant {
+  background: rgba(245, 200, 66, 0.14);
+  color: var(--lightning);
+}
+
+.el-text {
+  font-weight: 600;
+}
+.el-text.wind { color: var(--wind); }
+.el-text.lightning { color: var(--lightning); }
+.el-text.water { color: var(--water); }
+.el-text.fire { color: var(--fire); }
+.el-text.universal { color: var(--universal); }
+
+/* =========================================================
+   4. Interactive Milestone Preview
+   ========================================================= */
+.inspector-box {
+  margin-top: 26px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+
+.inspector-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.inspector-header h4 {
+  margin: 0;
+}
+
+.inspector-sub {
+  margin: 2px 0 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.inspector-control {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inspector-control input[type="range"] {
   width: 100%;
   accent-color: var(--accent);
 }
 
-.sim-grid {
-  display: grid;
-  grid-template-columns: 1fr;
+.inspector-body {
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
-.sim-slot {
-  background: var(--surface-alt);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 12px;
+.inspector-row {
+  padding: 10px 14px;
+  background: var(--surface-subtle);
+  border-radius: 6px;
+  border-left: 3px solid var(--accent);
 }
 
-.sim-slot.locked {
+.inspector-row.is-locked {
   opacity: 0.55;
+  border-left-color: var(--border);
 }
 
-.sim-slot-title {
+.inspector-row-label {
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--text-muted);
-  margin-bottom: 4px;
 }
 
-.sim-slot-val {
-  font-weight: 700;
-  font-size: 0.95rem;
+.inspector-row-value {
+  font-weight: 600;
+  color: var(--text);
+  font-size: 0.96rem;
 }
 
-/* Filter Bar & Arcana Set Cards */
-.filter-bar {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding-bottom: 8px;
-  margin-bottom: 14px;
-  scrollbar-width: none;
-}
-
-.filter-bar::-webkit-scrollbar {
-  display: none;
-}
-
-.filter-btn {
-  flex: 0 0 auto;
-  background: var(--surface);
-  color: var(--text-muted);
-  border: 1px solid var(--border);
-  padding: 7px 14px;
-  border-radius: 8px;
+.inspector-row-note {
   font-size: 0.86rem;
+  color: var(--text-muted);
+}
+
+/* =========================================================
+   5. Arcana Sets Article Flow & Filter Tabs
+   ========================================================= */
+.set-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0 28px;
+}
+
+.set-tab {
+  background: var(--surface);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.88rem;
   font-weight: 600;
   cursor: pointer;
 }
 
-.filter-btn.active {
-  background: var(--accent);
-  color: #0b0e17;
+.set-tab:hover {
   border-color: var(--accent);
 }
 
-.sets-stack {
+.set-tab.active {
+  background: var(--accent);
+  color: #0e1118;
+  border-color: var(--accent);
+}
+
+.sets-article-flow {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 40px;
 }
 
-.set-card {
-  border-top: 4px solid var(--accent);
+.set-article-block {
+  padding-top: 8px;
+  scroll-margin-top: 24px;
 }
 
-.set-card[data-element="wind"] { border-top-color: var(--wind); }
-.set-card[data-element="lightning"] { border-top-color: var(--lightning); }
-.set-card[data-element="water"] { border-top-color: var(--water); }
-.set-card[data-element="fire"] { border-top-color: var(--fire); }
-.set-card[data-element="universal"] { border-top-color: var(--universal); }
+.set-article-header {
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--border);
+}
 
-.set-meta {
+.set-article-header.wind { border-bottom-color: var(--wind); }
+.set-article-header.lightning { border-bottom-color: var(--lightning); }
+.set-article-header.water { border-bottom-color: var(--water); }
+.set-article-header.fire { border-bottom-color: var(--fire); }
+.set-article-header.universal { border-bottom-color: var(--universal); }
+
+.set-article-header h3 {
+  margin-top: 0;
+  font-size: 1.25rem;
+}
+
+.rune-breakdown-group {
+  margin-top: 18px;
+  padding-left: 14px;
+  border-left: 2px solid var(--indent-guide);
+}
+
+.rune-breakdown-group.wind { border-left-color: var(--wind); }
+.rune-breakdown-group.lightning { border-left-color: var(--lightning); }
+.rune-breakdown-group.water { border-left-color: var(--water); }
+.rune-breakdown-group.fire { border-left-color: var(--fire); }
+
+.rune-breakdown-group h4 {
+  margin-top: 0;
+  font-size: 1.02rem;
+}
+
+.common-article-flow {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  background: var(--surface-alt);
-  padding: 12px;
-  border-radius: 8px;
-  margin: 10px 0 14px;
-  font-size: 0.92rem;
+  gap: 20px;
 }
 
-.rune-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-}
-
-.rune-box {
-  background: var(--surface-alt);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 12px;
-}
-
-.rune-box h4 {
-  font-size: 0.92rem;
-  margin-bottom: 6px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.rune-box p {
-  font-size: 0.88rem;
-  margin-bottom: 4px;
-}
-
-.rune-box p:last-child {
-  margin-bottom: 0;
-}
-
-.site-footer {
-  margin-top: 40px;
-  padding: 20px 0;
+.article-footer {
+  margin-top: 48px;
+  padding-top: 20px;
   border-top: 1px solid var(--border);
-  text-align: center;
+  font-size: 0.86rem;
   color: var(--text-muted);
-  font-size: 0.85rem;
 }
 
-/* Tablet & Desktop Enhancements */
-@media (min-width: 720px) {
-  .site-header h1 {
-    font-size: 1.85rem;
+/* =========================================================
+   6. Desktop Enhancements (Collapsible Side Dock)
+   ========================================================= */
+@media (min-width: 960px) {
+  .article-header h1 {
+    font-size: 2.25rem;
   }
 
-  .callout-grid,
-  .grid-2,
-  .sim-grid,
-  .rune-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .grid-3 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .sim-top {
+  .inspector-header {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
   }
 
-  .sim-controls {
+  .inspector-control {
     min-width: 240px;
+  }
+
+  /* On desktop, dock opens persistently on the left without darkening content */
+  body.dock-pinned .side-dock {
+    transform: translateX(0);
+  }
+
+  body.dock-pinned .page-wrapper {
+    padding-left: calc(var(--dock-width) + 28px);
+  }
+
+  body.dock-pinned .dock-backdrop {
+    display: none !important;
+  }
+
+  .dock-toggle {
+    top: 20px;
+    left: 20px;
+    bottom: auto;
+    right: auto;
+  }
+
+  body.dock-pinned .dock-toggle {
+    opacity: 0;
+    pointer-events: none;
   }
 }
