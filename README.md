@@ -132,12 +132,14 @@ Runes can be leveled from **Lv. 1 to Lv. 10**. Leveling up runes increases base 
 * Unlocks the Rune Stat (I) slot and the Rune Attribute (I) slot.
 * **Rune Stat (I):** Gain +50 elemental ATK. Increases by +50 at every level up, up to a max of 500.
 * **Rune Attribute (I):** Gain a random attribute from First Class, Second Class, or Third Class.
+* First Class and Second Class attributes pool is limited by element of the Rune.
 
 #### 3.2.2 Level 5
 
 * Unlocks the Rune Attribute (II) slot.
 * **Rune Attribute (II):** Gain another random attribute from Second Class or Third Class.
 * You cannot obtain a First Class attribute at this level.
+* Second Class attributes pool is limited by element of the Rune.
 
 #### 3.2.3 Level 8
 
