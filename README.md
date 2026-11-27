@@ -139,7 +139,7 @@ Runes can be leveled from **Lv. 1 to Lv. 10**. Leveling up runes increases base 
 * Unlocks the Rune Attribute (II) slot.
 * **Rune Attribute (II):** Gain another random attribute from Second Class or Third Class.
 * You cannot obtain a First Class attribute at this level.
-* The econd Class attribute pool is limited by element of the Rune.
+* The Second Class attribute pool is limited by element of the Rune.
 
 #### 3.2.3 Level 8
 
