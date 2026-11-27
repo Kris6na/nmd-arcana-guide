@@ -132,14 +132,14 @@ Runes can be leveled from **Lv. 1 to Lv. 10**. Leveling up runes increases base 
 * Unlocks the Rune Stat (I) slot and the Rune Attribute (I) slot.
 * **Rune Stat (I):** Gain +50 elemental ATK. Increases by +50 at every level up, up to a max of 500.
 * **Rune Attribute (I):** Gain a random attribute from First Class, Second Class, or Third Class.
-* First Class and Second Class attributes pool is limited by element of the Rune.
+* The First Class and Second Class attribute pool is limited by element of the Rune.
 
 #### 3.2.2 Level 5
 
 * Unlocks the Rune Attribute (II) slot.
 * **Rune Attribute (II):** Gain another random attribute from Second Class or Third Class.
 * You cannot obtain a First Class attribute at this level.
-* Second Class attributes pool is limited by element of the Rune.
+* The econd Class attribute pool is limited by element of the Rune.
 
 #### 3.2.3 Level 8
 
@@ -152,7 +152,7 @@ Runes can be leveled from **Lv. 1 to Lv. 10**. Leveling up runes increases base 
 
 ## 4. Rune Attribute Classes
 
-### 4.1 First Class Attributes
+### 4.1 First Class Attribute Pool
 
 * Can be obtained from specific element runes only.
 * Can be equipped in the Rune Attribute (I) slot only.
@@ -185,7 +185,7 @@ Enhances the active effect of the specific arcana skill:
 * **Candle Dragon:** Releases **+1 to +2 extra Fireballs**.
 * **Divine Blessing:** Increases invincibility duration by **+0.5s to +1.5s**.
 
-### 4.2 Second Class Attributes
+### 4.2 Second Class Attribute Pool
 
 * Can be obtained from specific element runes only.
 * Can be equipped in the Rune Attribute (I) and (II) slots.
@@ -212,7 +212,7 @@ Enhances the active effect of the specific arcana skill:
 * Gain **+5% to +25%** Crit Rate for the arcana skill.
 * Can stack with identical attributes. No known cap.
 
-### 4.3 Third Class Attributes
+### 4.3 Third Class Attribute Pool
 
 * Can be obtained from all element runes.
 * Can be equipped in the Rune Attribute (I) and (II) slots.
