@@ -119,9 +119,23 @@
   td ul li:last-child { margin-bottom: 0; }
   .center th, .center td { text-align: center; }
 
-  .chart th small { display: block; font-weight: 400; }
+  /* Summary chart: tinted per element, attribute name as headline, details as one muted run-on line */
+  .chart th small { display: block; font-weight: 400; opacity: 0.8; }
+  .chart tbody tr { background: color-mix(in srgb, var(--bar) 12%, var(--bg)); }
+  .chart tbody th { background: color-mix(in srgb, var(--bar) 24%, var(--bg)); }
+  .chart td, .chart tbody th { border-color: color-mix(in srgb, var(--bar) 35%, var(--border)); }
   .chart td ul { list-style: none; padding-left: 0; }
-  .chart td ul li:first-child { font-weight: 700; }
+  .chart td li { display: inline; margin: 0; font-size: 0.88rem; opacity: 0.85; }
+  .chart td li:not(:last-child)::after { content: " \00b7  "; }
+  .chart td li:first-child {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--bar);
+    opacity: 1;
+    margin-bottom: 2px;
+  }
+  .chart td li:first-child::after { content: none; }
 
   .faq dt { font-weight: 700; margin-top: 1.1rem; }
   .faq dd { margin: 0.2rem 0 0; }
@@ -131,21 +145,21 @@
   @media (max-width: 640px) {
     body { font-size: 16px; padding: 12px; }
     h1 { font-size: 1.6rem; }
-    /* Stack the big element chart into one card per element */
+    /* Stack the chart into one tinted card per element */
     .chart, .chart tbody, .chart tr, .chart th, .chart td { display: block; width: 100%; }
     .chart thead { position: absolute; left: -9999px; }
     .chart { border: 0; }
-    .chart tr { border: 1px solid var(--border); margin-bottom: 1rem; border-radius: 6px; overflow: hidden; }
-    .chart tbody th { border: 0; border-bottom: 1px solid var(--border); }
-    .chart td { border: 0; border-bottom: 1px solid var(--border); }
+    .chart tr { border: 1px solid color-mix(in srgb, var(--bar) 40%, var(--border)); margin-bottom: 1rem; border-radius: 6px; overflow: hidden; }
+    .chart tbody th { border: 0; border-bottom: 1px solid color-mix(in srgb, var(--bar) 35%, var(--border)); padding: 8px 12px; }
+    .chart td { border: 0; border-bottom: 1px solid color-mix(in srgb, var(--bar) 25%, var(--border)); }
     .chart td:last-child { border-bottom: 0; }
     .chart td::before {
       content: attr(data-label);
       display: block;
+      font-size: 0.78rem;
       font-weight: 700;
-      margin-bottom: 4px;
-      color: var(--text);
-      opacity: 0.75;
+      margin-bottom: 2px;
+      opacity: 0.7;
     }
   }
 </style>
@@ -532,7 +546,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr class="wind">
         <th scope="row"><span class="wind">Wind</span></th>
         <td data-label="First Class">
           <ul>
@@ -551,7 +565,7 @@
           </ul>
         </td>
       </tr>
-      <tr>
+      <tr class="lightning">
         <th scope="row"><span class="lightning">Lightning</span></th>
         <td data-label="First Class">
           <ul>
@@ -571,7 +585,7 @@
           </ul>
         </td>
       </tr>
-      <tr>
+      <tr class="water">
         <th scope="row"><span class="water">Water</span></th>
         <td data-label="First Class">
           <ul>
@@ -589,7 +603,7 @@
           </ul>
         </td>
       </tr>
-      <tr>
+      <tr class="fire">
         <th scope="row"><span class="fire">Fire</span></th>
         <td data-label="First Class">
           <ul>
