@@ -31,12 +31,9 @@ The guide is a single static page. The content is fixed, so the whole page, incl
 
 To add a section, copy an existing heading and list, and give the heading a unique `id` so links to it work.
 
-## Colors
-
-Element colors (Wind, Lightning, Water, Fire, All Ninjas) are set at the top of `index.html` in the `:root` block (`--wind`, `--lightning`, `--water`, `--fire`, `--blessing`). The page follows the reader's light or dark setting automatically.
 
 ## Credits
 
-Written and maintained by **Fury** (Discord: `fury.22`), EACH Clan, Asia Server.
+Written and maintained by **Fury** (Discord: `fury.22`), with the help of clan members of EACH Clan, Asia Server.
 
 *Ninja Must Die* and all related names and game content belong to their respective owners. This is an unofficial, fan-made guide.
