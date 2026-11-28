@@ -173,7 +173,7 @@
   <ul>
     <li>Arcana is a battle buff system. Equip a full set of 4 runes to unlock a skill that triggers in Boss battles.</li>
     <li>Each rune gives <strong>stats</strong> (always active) and <strong>attributes</strong> (active only when the skill activates).</li>
-    <li>A skill fires once its countdown has finished and its condition is met. It activates once per battle unless attributes add more.</li>
+    <li>A skill activates once its countdown has finished and its condition is met. It activates once per battle unless attributes add more.</li>
   </ul>
 </div>
 
@@ -272,7 +272,7 @@
   <ul>
     <li><strong>Arcana skill:</strong> the special move that triggers during Boss battles.</li>
     <li><strong>Rune set:</strong> the 4 runes (one per element) needed to activate an arcana skill.</li>
-    <li><strong>Activation:</strong> the skill firing, once its condition is met and its countdown has finished.</li>
+    <li><strong>Activation:</strong> the skill triggering, once its condition is met and its countdown has finished.</li>
     <li><strong>Tier:</strong> Low, Mid or High. Higher tiers need more specific runes and Ninjas.</li>
   </ul>
 </div>
@@ -310,7 +310,7 @@
     </tbody>
   </table>
 </div>
-<p>Rune Stats work for any Ninja who is deployed at the time, whatever its element.</p>
+<p>Rune Stats work for whichever Ninja you have deployed, whatever its element.</p>
 
 
 <!-- ============ 2. HIGH-TIER ARCANA SKILLS ============ -->
@@ -366,8 +366,8 @@
 <div class="callout key-terms">
   <p class="title">💡 Key Terms</p>
   <ul>
-    <li><strong>Activation condition:</strong> what has to happen in battle before the skill is allowed to fire (for example, taking no damage).</li>
-    <li><strong>Countdown:</strong> a timer that starts when the Boss HP bar appears. The skill fires only when the countdown has finished and the condition is met.</li>
+    <li><strong>Activation condition:</strong> what has to happen in battle before the skill is allowed to activate (for example, taking no damage).</li>
+    <li><strong>Countdown:</strong> a timer that starts when the Boss HP bar appears. The skill activates only when the countdown has finished and the condition is met.</li>
     <li><strong>Relay:</strong> switching to another Ninja during battle. See <a href="#33-relay">3.3 Relay</a> for how it affects countdowns.</li>
   </ul>
 </div>
@@ -378,19 +378,18 @@
   <li>Both the condition and the countdown must be fulfilled. Each skill has its own (see <a href="#2-high-tier-arcana-skills">Section 2</a>).</li>
   <li>Each arcana skill requires its <strong>rune set</strong> to activate (see <a href="#12-rune-sets">1.2 Rune Sets</a>).</li>
   <li>Some rune attributes add bonus activations (see <a href="#34-bonus-activations">3.4 Bonus Activations</a>).</li>
-  <li>Your <strong>1st relay</strong> always restarts the current countdown. A 2nd relay has no effect (see <a href="#33-relay">3.3 Relay</a>).</li>
 </ul>
 
 <h3 id="32-countdown-and-condition">3.2 Countdown and Condition</h3>
 <ul>
   <li><strong>Start:</strong> The countdown starts when the Boss HP bar appears, as long as your Ninja is the correct element for the skill. Without the correct element Ninja, the countdown won’t start.</li>
-  <li><strong>Both are required:</strong> You can meet the condition before the countdown ends, but the skill only triggers when the countdown ends. If you can’t meet the condition before the countdown ends, the skill activates as soon as you meet it.</li>
+  <li><strong>Both are required:</strong> You can meet the condition early, but the skill still waits for the countdown to end. If you haven’t met the condition by then, it activates as soon as you do.</li>
   <li><strong>Accumulating conditions:</strong> Kamaitachi’s weapon uses and Blowfish’s damage taken both accumulate during the countdown.</li>
   <li><strong>Candle Dragon:</strong> Taking damage pauses the countdown for 5s instead of resetting it.</li>
 </ul>
 
 <h3 id="33-relay">3.3 Relay</h3>
-<p>Your <strong>1st relay</strong> always restarts the countdown that is currently running, even without the <strong>Skill Activation on Relay</strong> attribute. That attribute adds an instant activation on top of that. Your <strong>2nd relay</strong> does nothing.</p>
+<p>Relaying during a battle also affects your arcana skill’s countdowns. What happens depends on when you relay:</p>
 
 <div class="table-wrap">
   <table>
@@ -408,24 +407,22 @@
       </tr>
       <tr>
         <td>After the skill has used all its activations</td>
-        <td>Nothing to reset. A relay only triggers the skill if you have the <strong>Skill Activation on Relay</strong> attribute.</td>
+        <td>No countdown is left to restart. A relay can still activate the skill if you have the <strong>Skill Activation on Relay</strong> attribute.</td>
       </tr>
       <tr>
         <td>2nd relay</td>
-        <td>No effect.</td>
+        <td>No further effect.</td>
       </tr>
     </tbody>
   </table>
 </div>
-
-<p><strong>Skill Activation on Relay</strong> doesn’t depend on a countdown, so it always triggers on your 1st relay, whatever the element of the starting Ninja or the relaying Ninja.</p>
 
 <h3 id="34-bonus-activations">3.4 Bonus Activations</h3>
 <ul>
   <li>Once per battle is the default. Two rune attributes add bonus activations on top of it: <a href="#511-additional-skill-activation-wind-element-runes-only"><strong>Additional Skill Activation</strong></a> and <a href="#512-skill-activation-on-relay-lightning-element-runes-only"><strong>Skill Activation on Relay</strong></a>.</li>
   <li><strong>Additional Skill Activation</strong> has its own countdown. It starts only after the first activation, and it’s a separate wait from the first one.</li>
   <li><strong>Condition for the additional activation:</strong> You must meet the activation condition again, because it resets along with the countdown.</li>
-  <li><strong>Skill Activation on Relay</strong> ignores the condition.</li>
+  <li><strong>Skill Activation on Relay</strong> ignores the condition. It also doesn’t wait on any countdown, so it activates on your 1st relay no matter which element Ninja you started with or relay into.</li>
 </ul>
 
 
@@ -437,8 +434,6 @@
   <ul>
     <li><strong>Stat:</strong> a plain numeric bonus on the rune, such as ATK or Max HP. Stats always work for the deployed Ninja, even with an incomplete set.</li>
     <li><strong>Attribute:</strong> a special effect that modifies the arcana skill, such as an extra activation or bonus crit. Attributes only work once the skill activates.</li>
-    <li><strong>Slot:</strong> a place on the rune for one stat or attribute. Each slot unlocks at a set level (1, 5 or 8). The numerals (I) and (II) just number the slots of each type.</li>
-    <li><strong>Roll:</strong> the random result a slot gets when it unlocks.</li>
   </ul>
 </div>
 
@@ -450,7 +445,7 @@
   <li><span class="water">Water</span></li>
   <li><span class="fire">Fire</span></li>
 </ul>
-<p>Runes can be obtained from a weekly event called <strong>4 Symbols Exploration</strong>.</p>
+<p>You can get runes from a weekly event called <strong>4 Symbols Exploration</strong>.</p>
 
 <h3 id="42-leveling-milestones">4.2 Leveling Milestones</h3>
 <p>Runes can be leveled from <strong>Lv. 1 to Lv. 10</strong>. Leveling up runes increases base stats and unlocks additional <strong>Rune Attributes</strong> and <strong>Rune Stats</strong> at specific levels.</p>
@@ -473,14 +468,13 @@
   <li><strong>Rune Stat (I)</strong> (unlocks at Lv. 1): Gain +50 elemental ATK. Increases by +50 at every level up, up to a max of 500.</li>
   <li><strong>Rune Stat (II)</strong> (unlocks at Lv. 8): Gain a random stat. It does not increase with level up. It stays at what it rolled, including past Lv. 8.</li>
   <li><strong>Lv.8 stats pool:</strong> ATK increase, Weapon ATK increase, Ninjutsu ATK increase, Max HP increase, Score Bonus, Effect Resistance.</li>
-  <li>Only Score Bonus and Effect Resistance are percentages. The rest are flat values.</li>
   <li>Rune Stats work for any deployed Ninja, even with an incomplete or incorrect set (see <a href="#12-rune-sets">1.2 Rune Sets</a>).</li>
 </ul>
 
 <h3 id="44-rune-attribute-slots">4.4 Rune Attribute Slots</h3>
 <ul>
   <li><strong>Rune Attribute (I)</strong> (unlocks at Lv. 1): Gain a random attribute from First Class, Second Class, or Third Class.</li>
-  <li><strong>Rune Attribute (II)</strong> (unlocks at Lv. 5): Gain another random attribute from Second Class or Third Class. You cannot obtain a First Class attribute at this level.</li>
+  <li><strong>Rune Attribute (II)</strong> (unlocks at Lv. 5): Gain another random attribute from Second Class or Third Class. First Class attributes can’t roll at this level.</li>
   <li>Attribute (II) can roll the same attribute as Attribute (I), but only Second and Third Class attributes can be duplicated this way.</li>
   <li>The First Class and Second Class attribute pools are limited by the element of the rune.</li>
   <li>Attributes stay ineffective without arcana skill activation (see <a href="#12-rune-sets">1.2 Rune Sets</a>). Full details are in <a href="#5-rune-attributes">Section 5</a>.</li>
@@ -496,7 +490,7 @@
 
 <h4 id="452-dismantle-system-and-refund-rate">4.5.2 Dismantle System and Refund Rate</h4>
 <ul>
-  <li>Unwanted or poorly rolled runes can be <strong>dismantled</strong> to obtain upgrade materials.</li>
+  <li>Unwanted or poorly rolled runes can be <strong>dismantled</strong> for upgrade materials.</li>
   <li>Dismantling a <strong>Lv. 1 rune</strong> yields a <strong>fixed base amount</strong> of materials.</li>
   <li>Leveled-up runes return the base amount <strong>plus 80% of the upgrade materials</strong> spent on them.</li>
 </ul>
@@ -629,7 +623,7 @@
   <dd>Rune attributes can add bonus activations. See <a href="#34-bonus-activations">3.4 Bonus Activations</a>.</dd>
 
   <dt>Q: What does a relay do to my skill?</dt>
-  <dd>Your 1st relay restarts the running countdown. Your 2nd does nothing. See <a href="#33-relay">3.3 Relay</a>.</dd>
+  <dd>Your 1st relay restarts the running countdown, and your 2nd has no further effect. See <a href="#33-relay">3.3 Relay</a>.</dd>
 
   <dt>Q: What happens if my Ninja’s element doesn’t match the skill?</dt>
   <dd>The countdown won’t start. See <a href="#32-countdown-and-condition">3.2 Countdown and Condition</a>.</dd>
