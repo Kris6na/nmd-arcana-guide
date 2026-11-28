@@ -2,25 +2,53 @@
 ---
 @import "{{ site.theme }}";
 
-/* Key terms box */
-blockquote.key-terms {
-  background: #fff8e1;
-  border-left: 4px solid #f5a623;
+/* Callout boxes */
+blockquote.key-terms,
+blockquote.glance,
+blockquote.data-note {
   color: #333;
   padding: 10px 16px;
   border-radius: 4px;
 }
-blockquote.key-terms ul { margin: 6px 0; }
-blockquote.key-terms p { margin: 6px 0; }
+blockquote.key-terms { background: #fff8e1; border-left: 4px solid #f5a623; }
+blockquote.glance    { background: #e8f1fb; border-left: 4px solid #2f80c4; }
+blockquote.data-note { background: #f1f1f1; border-left: 4px solid #888; }
+blockquote.key-terms ul,
+blockquote.glance ul { margin: 6px 0; }
+blockquote.key-terms p,
+blockquote.glance p,
+blockquote.data-note p { margin: 6px 0; }
 
 /* Element colors for words */
-.wind { color: #2e9e5b; font-weight: bold; }
+.wind      { color: #2e9e5b; font-weight: bold; }
 .lightning { color: #d4a017; font-weight: bold; }
-.water { color: #2f80c4; font-weight: bold; }
-.fire { color: #d9442f; font-weight: bold; }
+.water     { color: #2f80c4; font-weight: bold; }
+.fire      { color: #d9442f; font-weight: bold; }
+.blessing  { color: #8e5bd0; font-weight: bold; }
 
 /* Element accent on headers (h2 to h4) */
-h2.wind, h3.wind, h4.wind { border-left: 5px solid #2e9e5b; padding-left: 10px; }
+h2.wind, h3.wind, h4.wind           { border-left: 5px solid #2e9e5b; padding-left: 10px; }
 h2.lightning, h3.lightning, h4.lightning { border-left: 5px solid #d4a017; padding-left: 10px; }
-h2.water, h3.water, h4.water { border-left: 5px solid #2f80c4; padding-left: 10px; }
-h2.fire, h3.fire, h4.fire { border-left: 5px solid #d9442f; padding-left: 10px; }
+h2.water, h3.water, h4.water        { border-left: 5px solid #2f80c4; padding-left: 10px; }
+h2.fire, h3.fire, h4.fire           { border-left: 5px solid #d9442f; padding-left: 10px; }
+h2.blessing, h3.blessing, h4.blessing { border-left: 5px solid #8e5bd0; padding-left: 10px; }
+
+/* Tables and collapsible index */
+table { display: block; overflow-x: auto; }
+details summary { cursor: pointer; font-weight: bold; margin: 8px 0; }
+
+/* Attribute summary chart */
+table.arcana-chart th,
+table.arcana-chart td { vertical-align: top; min-width: 180px; }
+table.arcana-chart td:first-child,
+table.arcana-chart th:first-child { min-width: 90px; font-weight: bold; }
+table.arcana-chart.third td:first-child { min-width: 150px; }
+table.arcana-chart tbody tr:nth-child(1) td:first-child { background: #d5ebd5; }
+table.arcana-chart tbody tr:nth-child(2) td:first-child { background: #f3e3bd; }
+table.arcana-chart tbody tr:nth-child(3) td:first-child { background: #cde3f4; }
+table.arcana-chart tbody tr:nth-child(4) td:first-child { background: #f6d3d6; }
+table.arcana-chart.third tbody tr td:first-child { background: #e6e0d6; }
+table.arcana-chart .wind      { color: #1e6b3c; }
+table.arcana-chart .lightning { color: #8a5a00; }
+table.arcana-chart .water     { color: #1a4f86; }
+table.arcana-chart .fire      { color: #8f1f1f; }
