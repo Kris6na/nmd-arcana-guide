@@ -171,7 +171,7 @@ Runes can be leveled from **Lv. 1 to Lv. 10**. Leveling up runes increases base 
 
 * Unlocks the Rune Stat (II) slot.
 * **Rune Stat (II):** Gain a random stat. It does not increase with level up.
-* Possible stats: ATK increase, Weapon ATK increase, Ninjutsu ATK increase, Max HP increase, Score Bonus, Effect Resistance.
+* Lv.8 stats pool: ATK increase, Weapon ATK increase, Ninjutsu ATK increase, Max HP increase, Score Bonus, Effect Resistance.
 * Only Score Bonus and Effect Resistance are percentages. The rest are flat values.
 
 ---
