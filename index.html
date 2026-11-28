@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NMD Arcana Guide</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #24292f;
+    --muted: #f6f8fa;
+    --border: #d0d7de;
+    --row-alt: #e8e0d4;
+    --lightning: #d4a017;
+    --water: #2f80c4;
+    --fire: #d94a38;
+    --wind: #2da15a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f141a;
+      --text: #e6edf3;
+      --muted: #161b22;
+      --border: #30363d;
+      --row-alt: #2a2620;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 16px;
+    background: var(--bg);
+    color: var(--text);
+    font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 720px; margin: 0 auto; }
+  h2 { font-size: 1.5rem; margin: 2rem 0 0.75rem; }
+  h3 {
+    font-size: 1.15rem;
+    margin: 1.5rem 0 0.5rem;
+    padding-left: 12px;
+    border-left: 5px solid var(--bar, transparent);
+    color: var(--bar, inherit);
+  }
+  h3.lightning { --bar: var(--lightning); }
+  h3.water     { --bar: var(--water); }
+  h3.fire      { --bar: var(--fire); }
+  h3.wind      { --bar: var(--wind); }
+  ul { padding-left: 1.4rem; margin: 0.5rem 0 1rem; }
+  li { margin-bottom: 0.35rem; }
+  .term { font-weight: 700; }
+  .table-wrap { overflow-x: auto; margin: 1rem 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--border);
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: var(--muted); text-align: center; }
+  tbody tr:nth-child(odd) td:first-child { background: var(--row-alt); }
+  td:first-child { font-weight: 700; }
+  td ul { margin: 0; padding-left: 1.2rem; }
+  td ul li { margin-bottom: 0.25rem; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- 3.3 RELAY -->
+<section id="relay">
+  <h2>3.3 Relay</h2>
+  <p>
+    Your <strong>1st relay</strong> always restarts the countdown that is
+    currently running, even without the
+    <span class="term">Skill Activation on Relay</span> attribute. That
+    attribute adds an instant activation on top of that. Your
+    <strong>2nd relay</strong> does nothing.
+  </p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>When you relay</th><th>What happens</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Before the skill has activated for the first time</td>
+          <td>The first activation’s countdown restarts. The additional activation’s countdown only starts after the first activation, so it isn’t affected yet.</td>
+        </tr>
+        <tr>
+          <td>After the first activation, before the additional activation</td>
+          <td>The relay restarts the additional activation’s countdown.</td>
+        </tr>
+        <tr>
+          <td>After the skill has used all its activations</td>
+          <td>Nothing to reset. A relay only triggers the skill if you have the <span class="term">Skill Activation on Relay</span> attribute.</td>
+        </tr>
+        <tr>
+          <td>2nd relay</td>
+          <td>No effect.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    <span class="term">Skill Activation on Relay</span> doesn’t depend on a
+    countdown, so it always triggers on your 1st relay, whatever the element
+    of the starting Ninja or the relaying Ninja.
+  </p>
+</section>
+
+<!-- ATTRIBUTE TABLE (replace the heading with your real section title) -->
+<section id="attributes">
+  <h2>Attribute Effects</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Attribute</th><th>Effect</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Temporary ATK Boost (10s)</td>
+          <td>
+            <ul>
+              <li>+50 to +120 ATK on activation (Beast Bull, Blowfish, Divine Blessing)</li>
+              <li>Candle Dragon: +6 to +20 per Fireball hit</li>
+              <li>Kamaitachi: +2 to +8 per Wind Blade hit</li>
+              <li>Cap: 400 ATK</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>HP Recovery / Instant Heal</td>
+          <td>
+            <ul>
+              <li>+50 to +120 HP instantly</li>
+              <li>Cap: 500 HP per activation</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>HP Recovery Speed / Regeneration (10s)</td>
+          <td>
+            <ul>
+              <li>+5 to +10 HP/s</li>
+              <li>No known cap</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Effect Resistance</td>
+          <td>
+            <ul>
+              <li>+5% to +8% debuff resistance</li>
+              <li>No known cap</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 5.3 SECOND CLASS ATTRIBUTE POOL -->
+<section id="second-class">
+  <h2>5.3 Second Class Attribute Pool</h2>
+  <ul>
+    <li>Can be obtained from specific element runes only.</li>
+    <li>Can be equipped in the Rune Attribute (I) and (II) slots.</li>
+    <li>Can be obtained at rune Level 1 and 5 only.</li>
+  </ul>
+
+  <h3 class="wind">5.3.1 Permanent ATK Boost (Wind Element Runes Only)</h3>
+  <ul>
+    <li>Gain a permanent stack of <strong>+50 to +120 ATK</strong> after the first skill activation.</li>
+    <li>Can stack with identical attributes. No known cap.</li>
+    <li>Additional skill activations do not add more stacks. It only stacks once from the first skill activation.</li>
+  </ul>
+
+  <h3 class="lightning">5.3.2 Skill Crit DMG (Lightning Element Runes Only)</h3>
+  <ul>
+    <li>Gain <strong>+14% to +30%</strong> Crit DMG for the arcana skill.</li>
+    <li>Can stack with identical attributes. No known cap.</li>
+  </ul>
+
+  <h3 class="water">5.3.3 Skill DMG Increase (Water Element Runes Only)</h3>
+  <ul>
+    <li>Gain <strong>+10% to +15%</strong> DMG for the arcana skill.</li>
+    <li>Can stack with identical attributes. No known cap.</li>
+  </ul>
+
+  <h3 class="fire">5.3.4 Skill Crit Rate (Fire Element Runes Only)</h3>
+  <ul>
+    <li>Gain <strong>+5% to +25%</strong> Crit Rate for the arcana skill.</li>
+    <li>Can stack with identical attributes. No known cap.</li>
+  </ul>
+</section>
+
+</main>
+</body>
+</html>
