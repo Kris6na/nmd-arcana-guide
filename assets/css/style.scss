@@ -1,0 +1,24 @@
+---
+---
+@import "{{ site.theme }}";
+
+/* Key terms box */
+blockquote.key-terms {
+  background: #fff8e1;
+  border-left: 4px solid #f5a623;
+  color: #333;
+  padding: 10px 16px;
+  border-radius: 4px;
+}
+
+/* Element colors for words */
+.wind { color: #2e9e5b; font-weight: bold; }
+.lightning { color: #d4a017; font-weight: bold; }
+.water { color: #2f80c4; font-weight: bold; }
+.fire { color: #d9442f; font-weight: bold; }
+
+/* Element accent on headers */
+h2.wind, h3.wind { border-left: 5px solid #2e9e5b; padding-left: 10px; }
+h2.lightning, h3.lightning { border-left: 5px solid #d4a017; padding-left: 10px; }
+h2.water, h3.water { border-left: 5px solid #2f80c4; padding-left: 10px; }
+h2.fire, h3.fire { border-left: 5px solid #d9442f; padding-left: 10px; }
