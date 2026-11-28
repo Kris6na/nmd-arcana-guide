@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NMD Arcana Guide</title>
+<title>Ninja Must Die: Arcana System</title>
 <style>
   :root {
     --bg: #ffffff;
@@ -11,10 +11,15 @@
     --muted: #f6f8fa;
     --border: #d0d7de;
     --row-alt: #e8e0d4;
-    --lightning: #d4a017;
+    --link: #0b69c7;
+    --wind: #2da15a;
+    --lightning: #c99700;
     --water: #2f80c4;
     --fire: #d94a38;
-    --wind: #2da15a;
+    --blessing: #9b59d0;
+    --glance-bg: #eaf3fc;  --glance-bar: #2f80c4;
+    --note-bg: #fff6df;    --note-bar: #c99700;
+    --terms-bg: #f1f4f7;   --terms-bar: #6b7785;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -23,9 +28,19 @@
       --muted: #161b22;
       --border: #30363d;
       --row-alt: #2a2620;
+      --link: #6cb6ff;
+      --wind: #4cc27c;
+      --lightning: #e6b422;
+      --water: #5aa5e6;
+      --fire: #f07562;
+      --blessing: #b983e6;
+      --glance-bg: #12263a;
+      --note-bg: #33290f;
+      --terms-bg: #1b222b;
     }
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 12px; }
   body {
     margin: 0;
     padding: 16px;
@@ -33,23 +48,59 @@
     color: var(--text);
     font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   }
-  main { max-width: 720px; margin: 0 auto; }
-  h2 { font-size: 1.5rem; margin: 2rem 0 0.75rem; }
-  h3 {
-    font-size: 1.15rem;
-    margin: 1.5rem 0 0.5rem;
-    padding-left: 12px;
-    border-left: 5px solid var(--bar, transparent);
-    color: var(--bar, inherit);
+  main { max-width: 760px; margin: 0 auto; }
+  a { color: var(--link); }
+
+  h1 { font-size: 1.9rem; line-height: 1.2; margin: 0.5rem 0 0.5rem; }
+  h2 {
+    font-size: 1.55rem; line-height: 1.25;
+    margin: 2.5rem 0 0.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
   }
-  h3.lightning { --bar: var(--lightning); }
-  h3.water     { --bar: var(--water); }
-  h3.fire      { --bar: var(--fire); }
-  h3.wind      { --bar: var(--wind); }
-  ul { padding-left: 1.4rem; margin: 0.5rem 0 1rem; }
+  h3 { font-size: 1.2rem; line-height: 1.3; margin: 1.75rem 0 0.5rem; }
+  h4 { font-size: 1.05rem; line-height: 1.3; margin: 1.4rem 0 0.4rem; }
+  h3.wind, h3.lightning, h3.water, h3.fire, h3.blessing,
+  h4.wind, h4.lightning, h4.water, h4.fire, h4.blessing {
+    padding-left: 12px;
+    border-left: 5px solid var(--bar);
+    color: var(--bar);
+  }
+  .wind      { --bar: var(--wind); }
+  .lightning { --bar: var(--lightning); }
+  .water     { --bar: var(--water); }
+  .fire      { --bar: var(--fire); }
+  .blessing  { --bar: var(--blessing); }
+  span.wind, span.lightning, span.water, span.fire, span.blessing {
+    color: var(--bar);
+    font-weight: 700;
+  }
+
+  p { margin: 0.6rem 0 1rem; }
+  ul, ol { padding-left: 1.4rem; margin: 0.5rem 0 1rem; }
   li { margin-bottom: 0.35rem; }
-  .term { font-weight: 700; }
-  .table-wrap { overflow-x: auto; margin: 1rem 0; }
+  ul ul, ol ul { margin: 0.35rem 0 0.35rem; }
+
+  .callout {
+    margin: 1.25rem 0;
+    padding: 12px 16px;
+    border-left: 5px solid var(--bar-c);
+    background: var(--bg-c);
+    border-radius: 0 6px 6px 0;
+  }
+  .callout > :first-child { margin-top: 0; }
+  .callout > :last-child { margin-bottom: 0; }
+  .callout .title { font-weight: 700; margin: 0 0 0.4rem; }
+  .callout ul { margin: 0.3rem 0; }
+  .glance    { --bar-c: var(--glance-bar); --bg-c: var(--glance-bg); }
+  .data-note { --bar-c: var(--note-bar);   --bg-c: var(--note-bg); }
+  .key-terms { --bar-c: var(--terms-bar);  --bg-c: var(--terms-bg); }
+
+  details { margin: 1rem 0; }
+  summary { cursor: pointer; font-weight: 600; padding: 6px 0; }
+  details > ol, details > ul { margin-top: 0.5rem; }
+
+  .table-wrap { overflow-x: auto; margin: 1rem 0 1.25rem; }
   table {
     width: 100%;
     border-collapse: collapse;
@@ -61,146 +112,698 @@
     text-align: left;
     vertical-align: top;
   }
-  th { background: var(--muted); text-align: center; }
-  tbody tr:nth-child(odd) td:first-child { background: var(--row-alt); }
-  td:first-child { font-weight: 700; }
+  thead th { background: var(--muted); }
+  tbody th { background: var(--row-alt); font-weight: 700; }
   td ul { margin: 0; padding-left: 1.2rem; }
   td ul li { margin-bottom: 0.25rem; }
+  td ul li:last-child { margin-bottom: 0; }
+  .center th, .center td { text-align: center; }
+
+  .chart th small { display: block; font-weight: 400; }
+  .chart td ul { list-style: none; padding-left: 0; }
+  .chart td ul li:first-child { font-weight: 700; }
+
+  .faq dt { font-weight: 700; margin-top: 1.1rem; }
+  .faq dd { margin: 0.2rem 0 0; }
+
+  .intro { font-style: italic; }
+
+  @media (max-width: 640px) {
+    body { font-size: 16px; padding: 12px; }
+    h1 { font-size: 1.6rem; }
+    /* Stack the big element chart into one card per element */
+    .chart, .chart tbody, .chart tr, .chart th, .chart td { display: block; width: 100%; }
+    .chart thead { position: absolute; left: -9999px; }
+    .chart { border: 0; }
+    .chart tr { border: 1px solid var(--border); margin-bottom: 1rem; border-radius: 6px; overflow: hidden; }
+    .chart tbody th { border: 0; border-bottom: 1px solid var(--border); }
+    .chart td { border: 0; border-bottom: 1px solid var(--border); }
+    .chart td:last-child { border-bottom: 0; }
+    .chart td::before {
+      content: attr(data-label);
+      display: block;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--text);
+      opacity: 0.75;
+    }
+  }
 </style>
 </head>
 <body>
 <main>
 
-<!-- 3.3 RELAY -->
-<section id="relay">
-  <h2>3.3 Relay</h2>
-  <p>
-    Your <strong>1st relay</strong> always restarts the countdown that is
-    currently running, even without the
-    <span class="term">Skill Activation on Relay</span> attribute. That
-    attribute adds an instant activation on top of that. Your
-    <strong>2nd relay</strong> does nothing.
-  </p>
+<h1>Ninja Must Die: Arcana System</h1>
+<p class="intro">This guide focuses exclusively on High-Tier Arcana.</p>
 
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th>When you relay</th><th>What happens</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Before the skill has activated for the first time</td>
-          <td>The first activation’s countdown restarts. The additional activation’s countdown only starts after the first activation, so it isn’t affected yet.</td>
-        </tr>
-        <tr>
-          <td>After the first activation, before the additional activation</td>
-          <td>The relay restarts the additional activation’s countdown.</td>
-        </tr>
-        <tr>
-          <td>After the skill has used all its activations</td>
-          <td>Nothing to reset. A relay only triggers the skill if you have the <span class="term">Skill Activation on Relay</span> attribute.</td>
-        </tr>
-        <tr>
-          <td>2nd relay</td>
-          <td>No effect.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<p><strong>Element colors:</strong>
+  <span class="wind">Wind</span> ·
+  <span class="lightning">Lightning</span> ·
+  <span class="water">Water</span> ·
+  <span class="fire">Fire</span> ·
+  <span class="blessing">All Ninjas</span>
+</p>
 
-  <p>
-    <span class="term">Skill Activation on Relay</span> doesn’t depend on a
-    countdown, so it always triggers on your 1st relay, whatever the element
-    of the starting Ninja or the relaying Ninja.
-  </p>
-</section>
-
-<!-- ATTRIBUTE TABLE (replace the heading with your real section title) -->
-<section id="attributes">
-  <h2>Attribute Effects</h2>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th>Attribute</th><th>Effect</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Temporary ATK Boost (10s)</td>
-          <td>
-            <ul>
-              <li>+50 to +120 ATK on activation (Beast Bull, Blowfish, Divine Blessing)</li>
-              <li>Candle Dragon: +6 to +20 per Fireball hit</li>
-              <li>Kamaitachi: +2 to +8 per Wind Blade hit</li>
-              <li>Cap: 400 ATK</li>
-            </ul>
-          </td>
-        </tr>
-        <tr>
-          <td>HP Recovery / Instant Heal</td>
-          <td>
-            <ul>
-              <li>+50 to +120 HP instantly</li>
-              <li>Cap: 500 HP per activation</li>
-            </ul>
-          </td>
-        </tr>
-        <tr>
-          <td>HP Recovery Speed / Regeneration (10s)</td>
-          <td>
-            <ul>
-              <li>+5 to +10 HP/s</li>
-              <li>No known cap</li>
-            </ul>
-          </td>
-        </tr>
-        <tr>
-          <td>Effect Resistance</td>
-          <td>
-            <ul>
-              <li>+5% to +8% debuff resistance</li>
-              <li>No known cap</li>
-            </ul>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- 5.3 SECOND CLASS ATTRIBUTE POOL -->
-<section id="second-class">
-  <h2>5.3 Second Class Attribute Pool</h2>
+<div class="callout glance">
+  <p class="title">🔎 At a glance</p>
   <ul>
-    <li>Can be obtained from specific element runes only.</li>
-    <li>Can be equipped in the Rune Attribute (I) and (II) slots.</li>
-    <li>Can be obtained at rune Level 1 and 5 only.</li>
+    <li>Arcana is a battle buff system. Equip a full set of 4 runes to unlock a skill that triggers in Boss battles.</li>
+    <li>Each rune gives <strong>stats</strong> (always active) and <strong>attributes</strong> (active only when the skill activates).</li>
+    <li>A skill fires once its countdown has finished and its condition is met. It activates once per battle unless attributes add more.</li>
   </ul>
+</div>
 
-  <h3 class="wind">5.3.1 Permanent ATK Boost (Wind Element Runes Only)</h3>
-  <ul>
-    <li>Gain a permanent stack of <strong>+50 to +120 ATK</strong> after the first skill activation.</li>
-    <li>Can stack with identical attributes. No known cap.</li>
-    <li>Additional skill activations do not add more stacks. It only stacks once from the first skill activation.</li>
-  </ul>
+<div class="callout data-note">
+  <p><strong>⚠️ Data note:</strong> The ranges in this guide are based on observation of thousands of runes. If you get values outside them, you are either very lucky or very unlucky.</p>
+</div>
 
-  <h3 class="lightning">5.3.2 Skill Crit DMG (Lightning Element Runes Only)</h3>
-  <ul>
-    <li>Gain <strong>+14% to +30%</strong> Crit DMG for the arcana skill.</li>
-    <li>Can stack with identical attributes. No known cap.</li>
-  </ul>
+<h2 id="index" style="border-top:0;padding-top:0;margin-top:2rem">Index</h2>
+<ol>
+  <li><a href="#1-how-arcana-works">How Arcana Works</a></li>
+  <li><a href="#2-high-tier-arcana-skills">High-Tier Arcana Skills</a></li>
+  <li><a href="#3-activation-mechanics">Activation Mechanics</a></li>
+  <li><a href="#4-runes">Runes</a></li>
+  <li><a href="#5-rune-attributes">Rune Attributes</a></li>
+  <li><a href="#6-faq">FAQ</a></li>
+</ol>
 
-  <h3 class="water">5.3.3 Skill DMG Increase (Water Element Runes Only)</h3>
-  <ul>
-    <li>Gain <strong>+10% to +15%</strong> DMG for the arcana skill.</li>
-    <li>Can stack with identical attributes. No known cap.</li>
-  </ul>
+<details>
+  <summary>Full index (all sub-sections)</summary>
+  <ol>
+    <li><a href="#1-how-arcana-works">How Arcana Works</a>
+      <ul>
+        <li><a href="#11-arcana-tiers-and-activation-requirements">1.1 Arcana Tiers and Activation Requirements</a></li>
+        <li><a href="#12-rune-sets">1.2 Rune Sets</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-high-tier-arcana-skills">High-Tier Arcana Skills</a>
+      <ul>
+        <li><a href="#21-kamaitachi-wind-element-ninja-only">2.1 Kamaitachi (Wind Element Ninja Only)</a></li>
+        <li><a href="#22-beast-bull-lightning-element-ninja-only">2.2 Beast Bull (Lightning Element Ninja Only)</a></li>
+        <li><a href="#23-blowfish-water-element-ninja-only">2.3 Blowfish (Water Element Ninja Only)</a></li>
+        <li><a href="#24-candle-dragon-fire-element-ninja-only">2.4 Candle Dragon (Fire Element Ninja Only)</a></li>
+        <li><a href="#25-divine-blessing-all-ninjas">2.5 Divine Blessing (All Ninjas)</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-activation-mechanics">Activation Mechanics</a>
+      <ul>
+        <li><a href="#31-activation-basics">3.1 Activation Basics</a></li>
+        <li><a href="#32-countdown-and-condition">3.2 Countdown and Condition</a></li>
+        <li><a href="#33-relay">3.3 Relay</a></li>
+        <li><a href="#34-bonus-activations">3.4 Bonus Activations</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-runes">Runes</a>
+      <ul>
+        <li><a href="#41-rune-elements-and-sources">4.1 Rune Elements and Sources</a></li>
+        <li><a href="#42-leveling-milestones">4.2 Leveling Milestones</a></li>
+        <li><a href="#43-rune-stats">4.3 Rune Stats</a></li>
+        <li><a href="#44-rune-attribute-slots">4.4 Rune Attribute Slots</a></li>
+        <li><a href="#45-upgrading-and-dismantling">4.5 Upgrading and Dismantling</a>
+          <ul>
+            <li><a href="#451-upgrade-costs">4.5.1 Upgrade Costs</a></li>
+            <li><a href="#452-dismantle-system-and-refund-rate">4.5.2 Dismantle System and Refund Rate</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#5-rune-attributes">Rune Attributes</a>
+      <ul>
+        <li><a href="#51-attribute-summary-chart">5.1 Attribute Summary Chart</a></li>
+        <li><a href="#52-first-class-attribute-pool">5.2 First Class Attribute Pool</a>
+          <ul>
+            <li><a href="#521-additional-skill-activation-wind-element-runes-only">5.2.1 Additional Skill Activation (Wind Element Runes Only)</a></li>
+            <li><a href="#522-skill-activation-on-relay-lightning-element-runes-only">5.2.2 Skill Activation on Relay (Lightning Element Runes Only)</a></li>
+            <li><a href="#523-skill-countdown-reduction-water-element-runes-only">5.2.3 Skill Countdown Reduction (Water Element Runes Only)</a></li>
+            <li><a href="#524-skill-upgrade-fire-element-runes-only">5.2.4 Skill Upgrade (Fire Element Runes Only)</a></li>
+          </ul>
+        </li>
+        <li><a href="#53-second-class-attribute-pool">5.3 Second Class Attribute Pool</a>
+          <ul>
+            <li><a href="#531-permanent-atk-boost-wind-element-runes-only">5.3.1 Permanent ATK Boost (Wind Element Runes Only)</a></li>
+            <li><a href="#532-skill-crit-dmg-lightning-element-runes-only">5.3.2 Skill Crit DMG (Lightning Element Runes Only)</a></li>
+            <li><a href="#533-skill-dmg-increase-water-element-runes-only">5.3.3 Skill DMG Increase (Water Element Runes Only)</a></li>
+            <li><a href="#534-skill-crit-rate-fire-element-runes-only">5.3.4 Skill Crit Rate (Fire Element Runes Only)</a></li>
+          </ul>
+        </li>
+        <li><a href="#54-third-class-attribute-pool">5.4 Third Class Attribute Pool</a>
+          <ul>
+            <li><a href="#541-temporary-atk-boost-for-10-seconds">5.4.1 Temporary ATK Boost (for 10 seconds)</a></li>
+            <li><a href="#542-hp-recovery--instant-heal">5.4.2 HP Recovery / Instant Heal</a></li>
+            <li><a href="#543-hp-recovery-speed--regeneration-for-10-seconds">5.4.3 HP Recovery Speed / Regeneration (for 10 seconds)</a></li>
+            <li><a href="#544-effect-resistance">5.4.4 Effect Resistance</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#6-faq">FAQ</a></li>
+  </ol>
+</details>
 
-  <h3 class="fire">5.3.4 Skill Crit Rate (Fire Element Runes Only)</h3>
+
+<!-- ============ 1. HOW ARCANA WORKS ============ -->
+<h2 id="1-how-arcana-works">1. How Arcana Works</h2>
+
+<div class="callout key-terms">
+  <p class="title">💡 Key Terms</p>
   <ul>
-    <li>Gain <strong>+5% to +25%</strong> Crit Rate for the arcana skill.</li>
-    <li>Can stack with identical attributes. No known cap.</li>
+    <li><strong>Arcana skill:</strong> the special move that triggers during Boss battles.</li>
+    <li><strong>Rune set:</strong> the 4 runes (one per element) needed to activate an arcana skill.</li>
+    <li><strong>Activation:</strong> the skill firing, once its condition is met and its countdown has finished.</li>
+    <li><strong>Tier:</strong> Low, Mid or High. Higher tiers need more specific runes and Ninjas.</li>
   </ul>
-</section>
+</div>
+
+<ul>
+  <li>Arcana is a <strong>battle buff system</strong> built around <strong>4 rune slots</strong>.</li>
+  <li>Equipping a full rune set unlocks a special skill that triggers during Boss battles.</li>
+  <li>A rune set also gives stat bonuses and attribute effects from the runes themselves.</li>
+</ul>
+
+<h3 id="11-arcana-tiers-and-activation-requirements">1.1 Arcana Tiers and Activation Requirements</h3>
+<p>Arcana is divided into <strong>Low</strong>, <strong>Mid</strong>, and <strong>High</strong> tiers:</p>
+<ul>
+  <li><strong>Low-tier arcana skills:</strong> Require 2 low-tier runes to activate. No Ninja restrictions.</li>
+  <li><strong>Mid-tier arcana skills:</strong> Require 3 mid-tier runes to activate. No Ninja restrictions. The exception is mid-tier Divine Blessing, which requires 4 runes.</li>
+  <li><strong>High-tier arcana skills:</strong> Require 4 high-tier runes to activate. A Ninja of the matching element is required. The exception is high-tier Divine Blessing, which has no Ninja restriction.</li>
+</ul>
+
+<h3 id="12-rune-sets">1.2 Rune Sets</h3>
+<ul>
+  <li>Every arcana skill requires a rune set to activate. A high-tier rune set is 4 runes of the same arcana skill, one of each element (<span class="wind">Wind</span>, <span class="lightning">Lightning</span>, <span class="water">Water</span>, <span class="fire">Fire</span>).</li>
+  <li>An incomplete or incorrect combination of runes will not activate the arcana skill.</li>
+</ul>
+
+<p>What still works without a complete, correct set:</p>
+<div class="table-wrap">
+  <table class="center">
+    <thead>
+      <tr><th>Feature</th><th>Complete set</th><th>Incomplete or incorrect set</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Rune Stats</strong> (I) and (II)</td><td>✅ Work</td><td>✅ Work</td></tr>
+      <tr><td><strong>Rune Attributes</strong> (I) and (II)</td><td>✅ Work once the skill activates</td><td>❌ Ineffective</td></tr>
+      <tr><td><strong>Arcana skill</strong></td><td>✅ Activates</td><td>❌ Does not activate</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>Rune Stats work for any Ninja who is deployed at the time, whatever its element.</p>
+
+
+<!-- ============ 2. HIGH-TIER ARCANA SKILLS ============ -->
+<h2 id="2-high-tier-arcana-skills">2. High-Tier Arcana Skills</h2>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Skill</th><th>Element</th><th>Activation condition</th><th>Countdown</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><a href="#21-kamaitachi-wind-element-ninja-only">Kamaitachi</a></td><td><span class="wind">Wind</span></td><td>Use main weapon skill twice</td><td>55s</td></tr>
+      <tr><td><a href="#22-beast-bull-lightning-element-ninja-only">Beast Bull</a></td><td><span class="lightning">Lightning</span></td><td>Automatic once countdown finishes</td><td>60s</td></tr>
+      <tr><td><a href="#23-blowfish-water-element-ninja-only">Blowfish</a></td><td><span class="water">Water</span></td><td>Take 500 damage from the Boss</td><td>55s</td></tr>
+      <tr><td><a href="#24-candle-dragon-fire-element-ninja-only">Candle Dragon</a></td><td><span class="fire">Fire</span></td><td>No damage taken in the battle</td><td>50s</td></tr>
+      <tr><td><a href="#25-divine-blessing-all-ninjas">Divine Blessing</a></td><td><span class="blessing">All Ninjas</span></td><td>HP drops below 50%</td><td>60s</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3 id="21-kamaitachi-wind-element-ninja-only" class="wind">2.1 Kamaitachi (Wind Element Ninja Only)</h3>
+<ul>
+  <li><strong>Skill Effect:</strong> Summons Kamaitachi to continuously fire <strong>wind blades</strong> at the Boss, then <strong>charges</strong> toward the Boss dealing collision DMG.</li>
+  <li><strong>Activation Condition:</strong> Use your <strong>main weapon skill twice</strong>.</li>
+  <li><strong>Countdown:</strong> <strong>55 seconds</strong> in a Boss battle. Weapon uses accumulate during the countdown.</li>
+</ul>
+
+<h3 id="22-beast-bull-lightning-element-ninja-only" class="lightning">2.2 Beast Bull (Lightning Element Ninja Only)</h3>
+<ul>
+  <li><strong>Skill Effect:</strong> Summons Minotaur to charge back and forth once, stop in front of the Ninja to <strong>roar</strong>, and dash away.</li>
+  <li><strong>Activation Condition:</strong> Activates <strong>automatically</strong> once the countdown finishes.</li>
+  <li><strong>Countdown:</strong> <strong>60 seconds</strong> in a Boss battle.</li>
+</ul>
+
+<h3 id="23-blowfish-water-element-ninja-only" class="water">2.3 Blowfish (Water Element Ninja Only)</h3>
+<ul>
+  <li><strong>Skill Effect:</strong> Summons Blowfish to <strong>block damage in front for 4s</strong>, then deals <strong>Screen Sweep DMG</strong>. The sweep damage scales based on the damage blocked.</li>
+  <li><strong>Activation Condition:</strong> Accumulate <strong>500 points of damage taken</strong> from the Boss.</li>
+  <li><strong>Countdown:</strong> <strong>55 seconds</strong> in a Boss battle. Damage taken accumulates during the countdown.</li>
+</ul>
+
+<h3 id="24-candle-dragon-fire-element-ninja-only" class="fire">2.4 Candle Dragon (Fire Element Ninja Only)</h3>
+<ul>
+  <li><strong>Skill Effect:</strong> Summons Candle Dragon to fire <strong>4 fireballs</strong> forward, then <strong>charges</strong> toward the Boss dealing collision DMG.</li>
+  <li><strong>Activation Condition:</strong> Play <strong>without taking damage</strong> in a Boss battle.</li>
+  <li><strong>Countdown:</strong> <strong>50 seconds</strong> in a Boss battle. Taking damage pauses the countdown for 5s rather than resetting it.</li>
+</ul>
+
+<h3 id="25-divine-blessing-all-ninjas" class="blessing">2.5 Divine Blessing (All Ninjas)</h3>
+<ul>
+  <li><strong>Skill Effect:</strong> The Ninja grows in size and gains <strong>temporary invincibility</strong>, releasing a <strong>Screen Sweep</strong> effect when invincibility ends.</li>
+  <li><strong>Activation Condition:</strong> <strong>HP drops below 50%</strong> in a Boss battle.</li>
+  <li><strong>Countdown:</strong> <strong>60 seconds</strong> in a Boss battle.</li>
+</ul>
+
+
+<!-- ============ 3. ACTIVATION MECHANICS ============ -->
+<h2 id="3-activation-mechanics">3. Activation Mechanics</h2>
+
+<div class="callout key-terms">
+  <p class="title">💡 Key Terms</p>
+  <ul>
+    <li><strong>Activation condition:</strong> what has to happen in battle before the skill is allowed to fire (for example, taking no damage).</li>
+    <li><strong>Countdown:</strong> a timer that starts when the Boss HP bar appears. The skill fires only when the countdown has finished and the condition is met.</li>
+    <li><strong>Relay:</strong> switching to another Ninja during battle. See <a href="#33-relay">3.3 Relay</a> for how it affects countdowns.</li>
+  </ul>
+</div>
+
+<h3 id="31-activation-basics">3.1 Activation Basics</h3>
+<ul>
+  <li>Every arcana skill activates <strong>once per battle</strong> by default, once its countdown has finished and its activation condition is met.</li>
+  <li>Both the condition and the countdown must be fulfilled. Each skill has its own (see <a href="#2-high-tier-arcana-skills">Section 2</a>).</li>
+  <li>Each arcana skill requires its <strong>rune set</strong> to activate (see <a href="#12-rune-sets">1.2 Rune Sets</a>).</li>
+  <li>Some rune attributes add bonus activations (see <a href="#34-bonus-activations">3.4 Bonus Activations</a>).</li>
+  <li>Your <strong>1st relay</strong> always restarts the current countdown. A 2nd relay has no effect (see <a href="#33-relay">3.3 Relay</a>).</li>
+</ul>
+
+<h3 id="32-countdown-and-condition">3.2 Countdown and Condition</h3>
+<ul>
+  <li><strong>Start:</strong> The countdown starts when the Boss HP bar appears, as long as your Ninja is the correct element for the skill. Without the correct element Ninja, the countdown won’t start.</li>
+  <li><strong>Both are required:</strong> You can meet the condition before the countdown ends, but the skill only triggers when the countdown ends. If you can’t meet the condition before the countdown ends, the skill activates as soon as you meet it.</li>
+  <li><strong>Accumulating conditions:</strong> Kamaitachi’s weapon uses and Blowfish’s damage taken both accumulate during the countdown.</li>
+  <li><strong>Candle Dragon:</strong> Taking damage pauses the countdown for 5s instead of resetting it.</li>
+</ul>
+
+<h3 id="33-relay">3.3 Relay</h3>
+<p>Your <strong>1st relay</strong> always restarts the countdown that is currently running, even without the <strong>Skill Activation on Relay</strong> attribute. That attribute adds an instant activation on top of that. Your <strong>2nd relay</strong> does nothing.</p>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>When you relay</th><th>What happens</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Before the skill has activated for the first time</td>
+        <td>The first activation’s countdown restarts. The additional activation’s countdown only starts after the first activation, so it isn’t affected yet.</td>
+      </tr>
+      <tr>
+        <td>After the first activation, before the additional activation</td>
+        <td>The relay restarts the additional activation’s countdown.</td>
+      </tr>
+      <tr>
+        <td>After the skill has used all its activations</td>
+        <td>Nothing to reset. A relay only triggers the skill if you have the <strong>Skill Activation on Relay</strong> attribute.</td>
+      </tr>
+      <tr>
+        <td>2nd relay</td>
+        <td>No effect.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p><strong>Skill Activation on Relay</strong> doesn’t depend on a countdown, so it always triggers on your 1st relay, whatever the element of the starting Ninja or the relaying Ninja.</p>
+
+<h3 id="34-bonus-activations">3.4 Bonus Activations</h3>
+<ul>
+  <li>Once per battle is the default. Two rune attributes add bonus activations on top of it: <a href="#521-additional-skill-activation-wind-element-runes-only"><strong>Additional Skill Activation</strong></a> and <a href="#522-skill-activation-on-relay-lightning-element-runes-only"><strong>Skill Activation on Relay</strong></a>.</li>
+  <li><strong>Additional Skill Activation</strong> has its own countdown. It starts only after the first activation, and it’s a separate wait from the first one.</li>
+  <li><strong>Condition for the additional activation:</strong> You must meet the activation condition again, because it resets along with the countdown.</li>
+  <li><strong>Skill Activation on Relay</strong> ignores the condition.</li>
+</ul>
+
+
+<!-- ============ 4. RUNES ============ -->
+<h2 id="4-runes">4. Runes</h2>
+
+<div class="callout key-terms">
+  <p class="title">💡 Key Terms: Stat vs. Attribute</p>
+  <ul>
+    <li><strong>Stat:</strong> a plain numeric bonus on the rune, such as ATK or Max HP. Stats always work for the deployed Ninja, even with an incomplete set.</li>
+    <li><strong>Attribute:</strong> a special effect that modifies the arcana skill, such as an extra activation or bonus crit. Attributes only work once the skill activates.</li>
+    <li><strong>Slot:</strong> a place on the rune for one stat or attribute. Each slot unlocks at a set level (1, 5 or 8). The numerals (I) and (II) just number the slots of each type.</li>
+    <li><strong>Roll:</strong> the random result a slot gets when it unlocks.</li>
+  </ul>
+</div>
+
+<h3 id="41-rune-elements-and-sources">4.1 Rune Elements and Sources</h3>
+<p>Runes come in 4 elements:</p>
+<ul>
+  <li><span class="wind">Wind</span></li>
+  <li><span class="lightning">Lightning</span></li>
+  <li><span class="water">Water</span></li>
+  <li><span class="fire">Fire</span></li>
+</ul>
+<p>Runes can be obtained from a weekly event called <strong>4 Symbols Exploration</strong>.</p>
+
+<h3 id="42-leveling-milestones">4.2 Leveling Milestones</h3>
+<p>Runes can be leveled from <strong>Lv. 1 to Lv. 10</strong>. Leveling up runes increases base stats and unlocks additional <strong>Rune Attributes</strong> and <strong>Rune Stats</strong> at specific levels.</p>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Level</th><th>Unlocks</th><th>What it gives</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Lv. 1</strong></td><td>Rune Stat (I) and Rune Attribute (I)</td><td>+50 elemental ATK (grows with level), plus a random attribute from First, Second or Third Class</td></tr>
+      <tr><td><strong>Lv. 5</strong></td><td>Rune Attribute (II)</td><td>A random attribute from Second or Third Class</td></tr>
+      <tr><td><strong>Lv. 8</strong></td><td>Rune Stat (II)</td><td>A random stat that does not grow with level</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3 id="43-rune-stats">4.3 Rune Stats</h3>
+<ul>
+  <li><strong>Rune Stat (I)</strong> (unlocks at Lv. 1): Gain +50 elemental ATK. Increases by +50 at every level up, up to a max of 500.</li>
+  <li><strong>Rune Stat (II)</strong> (unlocks at Lv. 8): Gain a random stat. It does not increase with level up. It stays at what it rolled, including past Lv. 8.</li>
+  <li><strong>Lv.8 stats pool:</strong> ATK increase, Weapon ATK increase, Ninjutsu ATK increase, Max HP increase, Score Bonus, Effect Resistance.</li>
+  <li>Only Score Bonus and Effect Resistance are percentages. The rest are flat values.</li>
+  <li>Rune Stats work for any deployed Ninja, even with an incomplete or incorrect set (see <a href="#12-rune-sets">1.2 Rune Sets</a>).</li>
+</ul>
+
+<h3 id="44-rune-attribute-slots">4.4 Rune Attribute Slots</h3>
+<ul>
+  <li><strong>Rune Attribute (I)</strong> (unlocks at Lv. 1): Gain a random attribute from First Class, Second Class, or Third Class.</li>
+  <li><strong>Rune Attribute (II)</strong> (unlocks at Lv. 5): Gain another random attribute from Second Class or Third Class. You cannot obtain a First Class attribute at this level.</li>
+  <li>Attribute (II) can roll the same attribute as Attribute (I), but only Second and Third Class attributes can be duplicated this way.</li>
+  <li>The First Class and Second Class attribute pools are limited by the element of the rune.</li>
+  <li>Attributes stay ineffective without arcana skill activation (see <a href="#12-rune-sets">1.2 Rune Sets</a>). Full details are in <a href="#5-rune-attributes">Section 5</a>.</li>
+</ul>
+
+<h3 id="45-upgrading-and-dismantling">4.5 Upgrading and Dismantling</h3>
+
+<h4 id="451-upgrade-costs">4.5.1 Upgrade Costs</h4>
+<ul>
+  <li>Certain materials are used to level up runes.</li>
+  <li>The material cost to level up a rune <strong>increases with each level</strong>.</li>
+</ul>
+
+<h4 id="452-dismantle-system-and-refund-rate">4.5.2 Dismantle System and Refund Rate</h4>
+<ul>
+  <li>Unwanted or poorly rolled runes can be <strong>dismantled</strong> to obtain upgrade materials.</li>
+  <li>Dismantling a <strong>Lv. 1 rune</strong> yields a <strong>fixed base amount</strong> of materials.</li>
+  <li>Leveled-up runes return the base amount <strong>plus 80% of the upgrade materials</strong> spent on them.</li>
+</ul>
+
+
+<!-- ============ 5. RUNE ATTRIBUTES ============ -->
+<h2 id="5-rune-attributes">5. Rune Attributes</h2>
+
+<div class="callout key-terms">
+  <p class="title">💡 Key Terms: Class and Pool</p>
+  <ul>
+    <li><strong>Class:</strong> a convenient classification of all available attributes for all runes. This is based on attribute rarity and impact upon gameplay.</li>
+    <li><strong>Pool:</strong> the list of attributes a slot can roll from. Some pools are limited by the rune’s element.</li>
+    <li><strong>Stack:</strong> identical attributes add together. Almost all identical attributes equipped in a rune set stack together.</li>
+  </ul>
+  <p><em>Example: Attribute (II) draws from the Second and Third Class pools. Second Class is limited to the rune’s element, and Third Class is open to every element.</em></p>
+</div>
+
+<h3 id="51-attribute-summary-chart">5.1 Attribute Summary Chart</h3>
+<p>Each row is a rune element. Third Class attributes are open to every element, so they have their own table below.</p>
+
+<div class="table-wrap">
+  <table class="chart">
+    <thead>
+      <tr>
+        <th>Rune element</th>
+        <th><strong>First Class</strong><small>Lv. 1 only</small><small>Slot (I) only</small><small>Specific element runes only</small></th>
+        <th><strong>Second Class</strong><small>Lv. 1 and 5 only</small><small>Slot (I) or (II)</small><small>Specific element runes only</small></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row"><span class="wind">Wind</span></th>
+        <td data-label="First Class">
+          <ul>
+            <li>Additional Skill Activation</li>
+            <li>+1 activation per battle</li>
+            <li>20% to 50% of original DMG</li>
+            <li>Has its own countdown</li>
+          </ul>
+        </td>
+        <td data-label="Second Class">
+          <ul>
+            <li>Permanent ATK Boost</li>
+            <li>+50 to +120 ATK</li>
+            <li>Applies after the first activation</li>
+            <li>Bonus activations add no stacks</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="lightning">Lightning</span></th>
+        <td data-label="First Class">
+          <ul>
+            <li>Skill Activation on Relay</li>
+            <li>Instant trigger on 1st relay</li>
+            <li>50% to 100% of original DMG</li>
+            <li>Ignores the activation condition</li>
+            <li>No trigger on 2nd relay</li>
+          </ul>
+        </td>
+        <td data-label="Second Class">
+          <ul>
+            <li>Skill Crit DMG</li>
+            <li>+14% to +30% Crit DMG</li>
+            <li>Arcana skill only</li>
+            <li>No known cap</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="water">Water</span></th>
+        <td data-label="First Class">
+          <ul>
+            <li>Skill Countdown Reduction</li>
+            <li>Countdown -5s to -12s</li>
+            <li>Also shortens the additional activation countdown</li>
+          </ul>
+        </td>
+        <td data-label="Second Class">
+          <ul>
+            <li>Skill DMG Increase</li>
+            <li>+10% to +15% DMG</li>
+            <li>Arcana skill only</li>
+            <li>No known cap</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="fire">Fire</span></th>
+        <td data-label="First Class">
+          <ul>
+            <li>Skill Upgrade</li>
+            <li>Kamaitachi: +0.5s to +1.5s Wind Blades</li>
+            <li>Beast Bull: bigger Roar DMG</li>
+            <li>Blowfish: bigger Screen Sweep DMG</li>
+            <li>Candle Dragon: +1 to +2 Fireballs</li>
+            <li>Divine Blessing: +0.5s to +1.5s invincibility</li>
+          </ul>
+        </td>
+        <td data-label="Second Class">
+          <ul>
+            <li>Skill Crit Rate</li>
+            <li>+5% to +25% Crit Rate</li>
+            <li>Arcana skill only</li>
+            <li>No known cap</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p><strong>Third Class:</strong> all element runes. Obtainable at Lv. 1 and 5 only, in slot (I) or (II).</p>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Attribute</th><th>Effect</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Temporary ATK Boost (10s)</th>
+        <td>
+          <ul>
+            <li>+50 to +120 ATK on activation (Beast Bull, Blowfish, Divine Blessing)</li>
+            <li>Candle Dragon: +6 to +20 per Fireball hit</li>
+            <li>Kamaitachi: +2 to +8 per Wind Blade hit</li>
+            <li>Cap: 400 ATK</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">HP Recovery / Instant Heal</th>
+        <td>
+          <ul>
+            <li>+50 to +120 HP instantly</li>
+            <li>Cap: 500 HP per activation</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">HP Recovery Speed / Regeneration (10s)</th>
+        <td>
+          <ul>
+            <li>+5 to +10 HP/s</li>
+            <li>No known cap</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Effect Resistance</th>
+        <td>
+          <ul>
+            <li>+5% to +8% debuff resistance</li>
+            <li>No known cap</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h3 id="52-first-class-attribute-pool">5.2 First Class Attribute Pool</h3>
+<ul>
+  <li>Can be obtained from specific element runes only.</li>
+  <li>Can be equipped in the Rune Attribute (I) slot only.</li>
+  <li>Can be obtained at rune Level 1 only.</li>
+</ul>
+
+<h4 id="521-additional-skill-activation-wind-element-runes-only" class="wind">5.2.1 Additional Skill Activation (Wind Element Runes Only)</h4>
+<ul>
+  <li>Grants <strong>+1 arcana skill activation</strong> per battle at <strong>20% to 50%</strong> of original skill DMG.</li>
+  <li>The additional activation has its own countdown, which starts after the first activation.</li>
+  <li>All equipped <strong>Second Class</strong> and <strong>Third Class</strong> rune attributes take effect upon skill activation.</li>
+</ul>
+
+<h4 id="522-skill-activation-on-relay-lightning-element-runes-only" class="lightning">5.2.2 Skill Activation on Relay (Lightning Element Runes Only)</h4>
+<ul>
+  <li>Immediately triggers the arcana skill once upon your <strong>1st relay</strong> at <strong>50% to 100%</strong> of original DMG.</li>
+  <li>All equipped <strong>Second Class</strong> and <strong>Third Class</strong> rune attributes take effect upon skill activation.</li>
+  <li>Does not trigger on a 2nd relay.</li>
+</ul>
+
+<h4 id="523-skill-countdown-reduction-water-element-runes-only" class="water">5.2.3 Skill Countdown Reduction (Water Element Runes Only)</h4>
+<ul>
+  <li>Reduces the skill’s Boss battle countdown by <strong>5s to 12s</strong>.</li>
+  <li>Also shortens the additional activation countdown.</li>
+</ul>
+
+<h4 id="524-skill-upgrade-fire-element-runes-only" class="fire">5.2.4 Skill Upgrade (Fire Element Runes Only)</h4>
+<p>Enhances the active effect of the specific arcana skill:</p>
+<ul>
+  <li><strong>Kamaitachi:</strong> Increases Wind Blade release duration by <strong>+0.5s to +1.5s</strong>.</li>
+  <li><strong>Beast Bull:</strong> Increases <strong>Roar DMG</strong>. The Roar can clear the screen.</li>
+  <li><strong>Blowfish:</strong> Increases <strong>Screen Sweep DMG</strong> at the end of the skill.</li>
+  <li><strong>Candle Dragon:</strong> Releases <strong>+1 to +2 extra Fireballs</strong>.</li>
+  <li><strong>Divine Blessing:</strong> Increases invincibility duration by <strong>+0.5s to +1.5s</strong>.</li>
+</ul>
+
+<h3 id="53-second-class-attribute-pool">5.3 Second Class Attribute Pool</h3>
+<ul>
+  <li>Can be obtained from specific element runes only.</li>
+  <li>Can be equipped in the Rune Attribute (I) and (II) slots.</li>
+  <li>Can be obtained at rune Level 1 and 5 only.</li>
+</ul>
+
+<h4 id="531-permanent-atk-boost-wind-element-runes-only" class="wind">5.3.1 Permanent ATK Boost (Wind Element Runes Only)</h4>
+<ul>
+  <li>Gain a permanent stack of <strong>+50 to +120 ATK</strong> after the first skill activation.</li>
+  <li>Can stack with identical attributes. No known cap.</li>
+  <li>Additional skill activations do not add more stacks. It only stacks once from the first skill activation.</li>
+</ul>
+
+<h4 id="532-skill-crit-dmg-lightning-element-runes-only" class="lightning">5.3.2 Skill Crit DMG (Lightning Element Runes Only)</h4>
+<ul>
+  <li>Gain <strong>+14% to +30%</strong> Crit DMG for the arcana skill.</li>
+  <li>Can stack with identical attributes. No known cap.</li>
+</ul>
+
+<h4 id="533-skill-dmg-increase-water-element-runes-only" class="water">5.3.3 Skill DMG Increase (Water Element Runes Only)</h4>
+<ul>
+  <li>Gain <strong>+10% to +15%</strong> DMG for the arcana skill.</li>
+  <li>Can stack with identical attributes. No known cap.</li>
+</ul>
+
+<h4 id="534-skill-crit-rate-fire-element-runes-only" class="fire">5.3.4 Skill Crit Rate (Fire Element Runes Only)</h4>
+<ul>
+  <li>Gain <strong>+5% to +25%</strong> Crit Rate for the arcana skill.</li>
+  <li>Can stack with identical attributes. No known cap.</li>
+</ul>
+
+<h3 id="54-third-class-attribute-pool">5.4 Third Class Attribute Pool</h3>
+<ul>
+  <li>Can be obtained from all element runes.</li>
+  <li>Can be equipped in the Rune Attribute (I) and (II) slots.</li>
+  <li>Can be obtained at rune Level 1 and 5 only.</li>
+</ul>
+
+<h4 id="541-temporary-atk-boost-for-10-seconds">5.4.1 Temporary ATK Boost (for 10 seconds)</h4>
+<ul>
+  <li><strong>Beast Bull, Blowfish, Divine Blessing:</strong> Gain <strong>+50 to +120 ATK</strong> on skill activation.</li>
+  <li><strong>Candle Dragon:</strong> Gain <strong>+6 to +20 ATK</strong> per Fireball hit.</li>
+  <li><strong>Kamaitachi:</strong> Gain <strong>+2 to +8 ATK</strong> per Wind Blade hit.</li>
+  <li>Can stack with identical attributes.</li>
+  <li>Capped at <strong>400 ATK</strong> max for 10 seconds.</li>
+</ul>
+
+<h4 id="542-hp-recovery--instant-heal">5.4.2 HP Recovery / Instant Heal</h4>
+<ul>
+  <li>Recover <strong>+50 to +120 HP</strong> immediately upon activation.</li>
+  <li>Can stack with identical attributes.</li>
+  <li>Capped at <strong>500 HP</strong> per activation.</li>
+</ul>
+
+<h4 id="543-hp-recovery-speed--regeneration-for-10-seconds">5.4.3 HP Recovery Speed / Regeneration (for 10 seconds)</h4>
+<ul>
+  <li>Recover <strong>+5 to +10 HP/s</strong> continuously for 10 seconds.</li>
+  <li>Can stack with identical attributes. No known cap.</li>
+</ul>
+
+<h4 id="544-effect-resistance">5.4.4 Effect Resistance</h4>
+<ul>
+  <li>Gain <strong>+5% to +8%</strong> debuff resistance.</li>
+  <li>Can stack with identical attributes. No known cap.</li>
+</ul>
+
+
+<!-- ============ 6. FAQ ============ -->
+<h2 id="6-faq">6. FAQ</h2>
+<p>Short answers, with links to the full explanation.</p>
+
+<dl class="faq">
+  <dt>Q: The skill activates “once per battle,” but I’ve seen it activate more than once. Why?</dt>
+  <dd>Rune attributes can add bonus activations. See <a href="#34-bonus-activations">3.4 Bonus Activations</a>.</dd>
+
+  <dt>Q: What does a relay do to my skill?</dt>
+  <dd>Your 1st relay restarts the running countdown. Your 2nd does nothing. See <a href="#33-relay">3.3 Relay</a>.</dd>
+
+  <dt>Q: What happens if my Ninja’s element doesn’t match the skill?</dt>
+  <dd>The countdown won’t start. See <a href="#32-countdown-and-condition">3.2 Countdown and Condition</a>.</dd>
+
+  <dt>Q: Do runes still help if I don’t have a complete set?</dt>
+  <dd>Only partly: Rune Stats work, Rune Attributes don’t. See <a href="#12-rune-sets">1.2 Rune Sets</a>.</dd>
+
+  <dt>Q: Do Rune Stats only work for a Ninja of the matching element?</dt>
+  <dd>No. They work for any deployed Ninja. See <a href="#43-rune-stats">4.3 Rune Stats</a>.</dd>
+
+  <dt>Q: Can my Level 5 rune give a First Class attribute? Can it match my Level 1 attribute?</dt>
+  <dd>No to the first. Yes to the second, but only for Second and Third Class attributes. See <a href="#44-rune-attribute-slots">4.4 Rune Attribute Slots</a>.</dd>
+
+  <dt>Q: Does Rune Stat (II) get stronger when I level the rune past 8?</dt>
+  <dd>No. See <a href="#43-rune-stats">4.3 Rune Stats</a>.</dd>
+
+  <dt>Q: Can I stack identical attributes?</dt>
+  <dd>Yes, for the Second and Third Class attributes listed with that rule. No cap is known for most of them. The exceptions are Temporary ATK Boost (capped at 400 ATK max for 10 seconds) and HP Recovery / Instant Heal (capped at 500 HP per activation). See <a href="#5-rune-attributes">Section 5</a>.</dd>
+
+  <dt>Q: Do bonus activations add more stacks of Permanent ATK Boost?</dt>
+  <dd>No. See <a href="#531-permanent-atk-boost-wind-element-runes-only">5.3.1</a>.</dd>
+
+  <dt>Q: How much do I get back from dismantling a rune?</dt>
+  <dd>See <a href="#452-dismantle-system-and-refund-rate">4.5.2 Dismantle System and Refund Rate</a>.</dd>
+</dl>
 
 </main>
 </body>

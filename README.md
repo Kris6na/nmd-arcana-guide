@@ -1,12 +1,21 @@
-# NMD Arcana Guide
+# Ninja Must Die: Arcana System
 
-A reference guide to arcana skills, relays, and rune attributes.
+A guide to the High-Tier Arcana system in Ninja Must Die: skills, activation mechanics, runes, and rune attributes.
 
 **Read the guide:** https://kris6na.github.io/nmd-arcana-guide/
 
-## About
+## What's in the guide
 
-This is a static, single-page guide. The content is fixed, so the whole page lives in one file with its styling included. There are no build steps and no dependencies.
+1. How Arcana Works
+2. High-Tier Arcana Skills
+3. Activation Mechanics (countdown, condition, relay, bonus activations)
+4. Runes (leveling, stats, attribute slots, upgrading and dismantling)
+5. Rune Attributes (First, Second and Third Class pools)
+6. FAQ
+
+## About this repo
+
+The guide is a single static page. The content is fixed, so the whole page, including its styling, lives in one file. There are no build steps and no dependencies.
 
 ## Files
 
@@ -20,8 +29,14 @@ This is a static, single-page guide. The content is fixed, so the whole page liv
 2. Edit the text between the tags.
 3. Commit the change. GitHub Pages rebuilds the site within a minute or two.
 
-To add a section, copy an existing `<section>` block and replace its contents.
+To add a section, copy an existing heading and list, and give the heading a unique `id` so links to it work.
 
 ## Colors
 
-Section heading colors are set at the top of `index.html` in the `:root` block (`--lightning`, `--water`, `--fire`, `--wind`). The page follows the reader's light or dark setting automatically.
+Element colors (Wind, Lightning, Water, Fire, All Ninjas) are set at the top of `index.html` in the `:root` block (`--wind`, `--lightning`, `--water`, `--fire`, `--blessing`). The page follows the reader's light or dark setting automatically.
+
+## Credits
+
+Written and maintained by **Fury** (Discord: `fury.22`), EACH Clan, Asia Server.
+
+*Ninja Must Die* and all related names and game content belong to their respective owners. This is an unofficial, fan-made guide.
