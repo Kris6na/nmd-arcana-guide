@@ -179,9 +179,9 @@ Runes can be leveled from **Lv. 1 to Lv. 10**. Leveling up runes increases base 
 ## 4. Rune Attribute Classes
 
 > 💡 **Key Terms: Class and Pool**
-> * **Class:** a group of attributes (First, Second or Third) that decides which slot and level an attribute can appear in.
+> * **Class:** a convenient classification of all available attributes for all runes. This is based on attribute rarity and impact upon gameplay.
 > * **Pool:** the list of attributes a slot can roll from. Some pools are limited by the rune's element.
-> * **Stack:** identical attributes add together.
+> * **Stack:** identical attributes add together. Almost all identical attributes equipped in a rune set stack together.
 >
 > *Example: Attribute (II) draws from the Second and Third Class pools. Second Class is limited to the rune's element, and Third Class is open to every element.*
 {: .key-terms}
