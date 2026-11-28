@@ -12,6 +12,7 @@
     --border: #d0d7de;
     --row-alt: #e8e0d4;
     --link: #0b69c7;
+    --accent: #5b3fc4;
     --wind: #2da15a;
     --lightning: #c99700;
     --water: #2f80c4;
@@ -29,6 +30,7 @@
       --border: #30363d;
       --row-alt: #2a2620;
       --link: #6cb6ff;
+      --accent: #7a5fe0;
       --wind: #4cc27c;
       --lightning: #e6b422;
       --water: #5aa5e6;
@@ -52,19 +54,41 @@
   a { color: var(--link); }
 
   h1 { font-size: 1.9rem; line-height: 1.2; margin: 0.5rem 0 0.5rem; }
+  /* Main sections: solid band */
   h2 {
-    font-size: 1.55rem; line-height: 1.25;
-    margin: 2.5rem 0 0.75rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
+    font-size: 1.45rem; line-height: 1.25;
+    margin: 2.75rem 0 1rem;
+    padding: 10px 14px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 6px;
   }
-  h3 { font-size: 1.2rem; line-height: 1.3; margin: 1.75rem 0 0.5rem; }
-  h4 { font-size: 1.05rem; line-height: 1.3; margin: 1.4rem 0 0.4rem; }
-  h3.wind, h3.lightning, h3.water, h3.fire, h3.blessing,
-  h4.wind, h4.lightning, h4.water, h4.fire, h4.blessing {
-    padding-left: 12px;
-    border-left: 5px solid var(--bar);
+  /* Sub sections: accent colour, underlined */
+  h3 {
+    font-size: 1.25rem; line-height: 1.3;
+    margin: 2rem 0 0.6rem;
+    padding-bottom: 4px;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+  }
+  /* Third level: tinted strip with a left bar */
+  h4 {
+    font-size: 1.05rem; line-height: 1.3;
+    margin: 1.5rem 0 0.5rem;
+    padding: 6px 10px;
+    color: var(--text);
+    border-left: 4px solid var(--accent);
+    background: var(--muted);
+    border-radius: 0 4px 4px 0;
+  }
+  h3.wind, h3.lightning, h3.water, h3.fire, h3.blessing {
     color: var(--bar);
+    border-bottom-color: var(--bar);
+  }
+  h4.wind, h4.lightning, h4.water, h4.fire, h4.blessing {
+    color: var(--bar);
+    border-left-color: var(--bar);
+    background: color-mix(in srgb, var(--bar) 12%, var(--bg));
   }
   .wind      { --bar: var(--wind); }
   .lightning { --bar: var(--lightning); }
@@ -119,24 +143,6 @@
   td ul li:last-child { margin-bottom: 0; }
   .center th, .center td { text-align: center; }
 
-  /* Summary chart: tinted per element, attribute name as headline, details as one muted run-on line */
-  .chart th small { display: block; font-weight: 400; opacity: 0.8; }
-  .chart tbody tr { background: color-mix(in srgb, var(--bar) 12%, var(--bg)); }
-  .chart tbody th { background: color-mix(in srgb, var(--bar) 24%, var(--bg)); }
-  .chart td, .chart tbody th { border-color: color-mix(in srgb, var(--bar) 35%, var(--border)); }
-  .chart td ul { list-style: none; padding-left: 0; }
-  .chart td li { display: inline; margin: 0; font-size: 0.88rem; opacity: 0.85; }
-  .chart td li:not(:last-child)::after { content: " \00b7  "; }
-  .chart td li:first-child {
-    display: block;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--bar);
-    opacity: 1;
-    margin-bottom: 2px;
-  }
-  .chart td li:first-child::after { content: none; }
-
   .faq dt { font-weight: 700; margin-top: 1.1rem; }
   .faq dd { margin: 0.2rem 0 0; }
 
@@ -145,22 +151,6 @@
   @media (max-width: 640px) {
     body { font-size: 16px; padding: 12px; }
     h1 { font-size: 1.6rem; }
-    /* Stack the chart into one tinted card per element */
-    .chart, .chart tbody, .chart tr, .chart th, .chart td { display: block; width: 100%; }
-    .chart thead { position: absolute; left: -9999px; }
-    .chart { border: 0; }
-    .chart tr { border: 1px solid color-mix(in srgb, var(--bar) 40%, var(--border)); margin-bottom: 1rem; border-radius: 6px; overflow: hidden; }
-    .chart tbody th { border: 0; border-bottom: 1px solid color-mix(in srgb, var(--bar) 35%, var(--border)); padding: 8px 12px; }
-    .chart td { border: 0; border-bottom: 1px solid color-mix(in srgb, var(--bar) 25%, var(--border)); }
-    .chart td:last-child { border-bottom: 0; }
-    .chart td::before {
-      content: attr(data-label);
-      display: block;
-      font-size: 0.78rem;
-      font-weight: 700;
-      margin-bottom: 2px;
-      opacity: 0.7;
-    }
   }
 </style>
 </head>
@@ -191,7 +181,7 @@
   <p><strong>⚠️ Data note:</strong> The ranges in this guide are based on observation of thousands of runes. If you get values outside them, you are either very lucky or very unlucky.</p>
 </div>
 
-<h2 id="index" style="border-top:0;padding-top:0;margin-top:2rem">Index</h2>
+<h2 id="index">Index</h2>
 <ol>
   <li><a href="#1-how-arcana-works">How Arcana Works</a></li>
   <li><a href="#2-high-tier-arcana-skills">High-Tier Arcana Skills</a></li>
@@ -243,29 +233,28 @@
     </li>
     <li><a href="#5-rune-attributes">Rune Attributes</a>
       <ul>
-        <li><a href="#51-attribute-summary-chart">5.1 Attribute Summary Chart</a></li>
-        <li><a href="#52-first-class-attribute-pool">5.2 First Class Attribute Pool</a>
+        <li><a href="#51-first-class-attribute-pool">5.1 First Class Attribute Pool</a>
           <ul>
-            <li><a href="#521-additional-skill-activation-wind-element-runes-only">5.2.1 Additional Skill Activation (Wind Element Runes Only)</a></li>
-            <li><a href="#522-skill-activation-on-relay-lightning-element-runes-only">5.2.2 Skill Activation on Relay (Lightning Element Runes Only)</a></li>
-            <li><a href="#523-skill-countdown-reduction-water-element-runes-only">5.2.3 Skill Countdown Reduction (Water Element Runes Only)</a></li>
-            <li><a href="#524-skill-upgrade-fire-element-runes-only">5.2.4 Skill Upgrade (Fire Element Runes Only)</a></li>
+            <li><a href="#511-additional-skill-activation-wind-element-runes-only">5.1.1 Additional Skill Activation (Wind Element Runes Only)</a></li>
+            <li><a href="#512-skill-activation-on-relay-lightning-element-runes-only">5.1.2 Skill Activation on Relay (Lightning Element Runes Only)</a></li>
+            <li><a href="#513-skill-countdown-reduction-water-element-runes-only">5.1.3 Skill Countdown Reduction (Water Element Runes Only)</a></li>
+            <li><a href="#514-skill-upgrade-fire-element-runes-only">5.1.4 Skill Upgrade (Fire Element Runes Only)</a></li>
           </ul>
         </li>
-        <li><a href="#53-second-class-attribute-pool">5.3 Second Class Attribute Pool</a>
+        <li><a href="#52-second-class-attribute-pool">5.2 Second Class Attribute Pool</a>
           <ul>
-            <li><a href="#531-permanent-atk-boost-wind-element-runes-only">5.3.1 Permanent ATK Boost (Wind Element Runes Only)</a></li>
-            <li><a href="#532-skill-crit-dmg-lightning-element-runes-only">5.3.2 Skill Crit DMG (Lightning Element Runes Only)</a></li>
-            <li><a href="#533-skill-dmg-increase-water-element-runes-only">5.3.3 Skill DMG Increase (Water Element Runes Only)</a></li>
-            <li><a href="#534-skill-crit-rate-fire-element-runes-only">5.3.4 Skill Crit Rate (Fire Element Runes Only)</a></li>
+            <li><a href="#521-permanent-atk-boost-wind-element-runes-only">5.2.1 Permanent ATK Boost (Wind Element Runes Only)</a></li>
+            <li><a href="#522-skill-crit-dmg-lightning-element-runes-only">5.2.2 Skill Crit DMG (Lightning Element Runes Only)</a></li>
+            <li><a href="#523-skill-dmg-increase-water-element-runes-only">5.2.3 Skill DMG Increase (Water Element Runes Only)</a></li>
+            <li><a href="#524-skill-crit-rate-fire-element-runes-only">5.2.4 Skill Crit Rate (Fire Element Runes Only)</a></li>
           </ul>
         </li>
-        <li><a href="#54-third-class-attribute-pool">5.4 Third Class Attribute Pool</a>
+        <li><a href="#53-third-class-attribute-pool">5.3 Third Class Attribute Pool</a>
           <ul>
-            <li><a href="#541-temporary-atk-boost-for-10-seconds">5.4.1 Temporary ATK Boost (for 10 seconds)</a></li>
-            <li><a href="#542-hp-recovery--instant-heal">5.4.2 HP Recovery / Instant Heal</a></li>
-            <li><a href="#543-hp-recovery-speed--regeneration-for-10-seconds">5.4.3 HP Recovery Speed / Regeneration (for 10 seconds)</a></li>
-            <li><a href="#544-effect-resistance">5.4.4 Effect Resistance</a></li>
+            <li><a href="#531-temporary-atk-boost-for-10-seconds">5.3.1 Temporary ATK Boost (for 10 seconds)</a></li>
+            <li><a href="#532-hp-recovery--instant-heal">5.3.2 HP Recovery / Instant Heal</a></li>
+            <li><a href="#533-hp-recovery-speed--regeneration-for-10-seconds">5.3.3 HP Recovery Speed / Regeneration (for 10 seconds)</a></li>
+            <li><a href="#534-effect-resistance">5.3.4 Effect Resistance</a></li>
           </ul>
         </li>
       </ul>
@@ -440,7 +429,7 @@
 
 <h3 id="34-bonus-activations">3.4 Bonus Activations</h3>
 <ul>
-  <li>Once per battle is the default. Two rune attributes add bonus activations on top of it: <a href="#521-additional-skill-activation-wind-element-runes-only"><strong>Additional Skill Activation</strong></a> and <a href="#522-skill-activation-on-relay-lightning-element-runes-only"><strong>Skill Activation on Relay</strong></a>.</li>
+  <li>Once per battle is the default. Two rune attributes add bonus activations on top of it: <a href="#511-additional-skill-activation-wind-element-runes-only"><strong>Additional Skill Activation</strong></a> and <a href="#512-skill-activation-on-relay-lightning-element-runes-only"><strong>Skill Activation on Relay</strong></a>.</li>
   <li><strong>Additional Skill Activation</strong> has its own countdown. It starts only after the first activation, and it’s a separate wait from the first one.</li>
   <li><strong>Condition for the additional activation:</strong> You must meet the activation condition again, because it resets along with the countdown.</li>
   <li><strong>Skill Activation on Relay</strong> ignores the condition.</li>
@@ -533,179 +522,34 @@
   <p><em>Example: Attribute (II) draws from the Second and Third Class pools. Second Class is limited to the rune’s element, and Third Class is open to every element.</em></p>
 </div>
 
-<h3 id="51-attribute-summary-chart">5.1 Attribute Summary Chart</h3>
-<p>Each row is a rune element. Third Class attributes are open to every element, so they have their own table below.</p>
-
-<div class="table-wrap">
-  <table class="chart">
-    <thead>
-      <tr>
-        <th>Rune element</th>
-        <th><strong>First Class</strong><small>Lv. 1 only</small><small>Slot (I) only</small><small>Specific element runes only</small></th>
-        <th><strong>Second Class</strong><small>Lv. 1 and 5 only</small><small>Slot (I) or (II)</small><small>Specific element runes only</small></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="wind">
-        <th scope="row"><span class="wind">Wind</span></th>
-        <td data-label="First Class">
-          <ul>
-            <li>Additional Skill Activation</li>
-            <li>+1 activation per battle</li>
-            <li>20% to 50% of original DMG</li>
-            <li>Has its own countdown</li>
-          </ul>
-        </td>
-        <td data-label="Second Class">
-          <ul>
-            <li>Permanent ATK Boost</li>
-            <li>+50 to +120 ATK</li>
-            <li>Applies after the first activation</li>
-            <li>Bonus activations add no stacks</li>
-          </ul>
-        </td>
-      </tr>
-      <tr class="lightning">
-        <th scope="row"><span class="lightning">Lightning</span></th>
-        <td data-label="First Class">
-          <ul>
-            <li>Skill Activation on Relay</li>
-            <li>Instant trigger on 1st relay</li>
-            <li>50% to 100% of original DMG</li>
-            <li>Ignores the activation condition</li>
-            <li>No trigger on 2nd relay</li>
-          </ul>
-        </td>
-        <td data-label="Second Class">
-          <ul>
-            <li>Skill Crit DMG</li>
-            <li>+14% to +30% Crit DMG</li>
-            <li>Arcana skill only</li>
-            <li>No known cap</li>
-          </ul>
-        </td>
-      </tr>
-      <tr class="water">
-        <th scope="row"><span class="water">Water</span></th>
-        <td data-label="First Class">
-          <ul>
-            <li>Skill Countdown Reduction</li>
-            <li>Countdown -5s to -12s</li>
-            <li>Also shortens the additional activation countdown</li>
-          </ul>
-        </td>
-        <td data-label="Second Class">
-          <ul>
-            <li>Skill DMG Increase</li>
-            <li>+10% to +15% DMG</li>
-            <li>Arcana skill only</li>
-            <li>No known cap</li>
-          </ul>
-        </td>
-      </tr>
-      <tr class="fire">
-        <th scope="row"><span class="fire">Fire</span></th>
-        <td data-label="First Class">
-          <ul>
-            <li>Skill Upgrade</li>
-            <li>Kamaitachi: +0.5s to +1.5s Wind Blades</li>
-            <li>Beast Bull: bigger Roar DMG</li>
-            <li>Blowfish: bigger Screen Sweep DMG</li>
-            <li>Candle Dragon: +1 to +2 Fireballs</li>
-            <li>Divine Blessing: +0.5s to +1.5s invincibility</li>
-          </ul>
-        </td>
-        <td data-label="Second Class">
-          <ul>
-            <li>Skill Crit Rate</li>
-            <li>+5% to +25% Crit Rate</li>
-            <li>Arcana skill only</li>
-            <li>No known cap</li>
-          </ul>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<p><strong>Third Class:</strong> all element runes. Obtainable at Lv. 1 and 5 only, in slot (I) or (II).</p>
-
-<div class="table-wrap">
-  <table>
-    <thead>
-      <tr><th>Attribute</th><th>Effect</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">Temporary ATK Boost (10s)</th>
-        <td>
-          <ul>
-            <li>+50 to +120 ATK on activation (Beast Bull, Blowfish, Divine Blessing)</li>
-            <li>Candle Dragon: +6 to +20 per Fireball hit</li>
-            <li>Kamaitachi: +2 to +8 per Wind Blade hit</li>
-            <li>Cap: 400 ATK</li>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">HP Recovery / Instant Heal</th>
-        <td>
-          <ul>
-            <li>+50 to +120 HP instantly</li>
-            <li>Cap: 500 HP per activation</li>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">HP Recovery Speed / Regeneration (10s)</th>
-        <td>
-          <ul>
-            <li>+5 to +10 HP/s</li>
-            <li>No known cap</li>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">Effect Resistance</th>
-        <td>
-          <ul>
-            <li>+5% to +8% debuff resistance</li>
-            <li>No known cap</li>
-          </ul>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<h3 id="52-first-class-attribute-pool">5.2 First Class Attribute Pool</h3>
+<h3 id="51-first-class-attribute-pool">5.1 First Class Attribute Pool</h3>
 <ul>
   <li>Can be obtained from specific element runes only.</li>
   <li>Can be equipped in the Rune Attribute (I) slot only.</li>
   <li>Can be obtained at rune Level 1 only.</li>
 </ul>
 
-<h4 id="521-additional-skill-activation-wind-element-runes-only" class="wind">5.2.1 Additional Skill Activation (Wind Element Runes Only)</h4>
+<h4 id="511-additional-skill-activation-wind-element-runes-only" class="wind">5.1.1 Additional Skill Activation (Wind Element Runes Only)</h4>
 <ul>
   <li>Grants <strong>+1 arcana skill activation</strong> per battle at <strong>20% to 50%</strong> of original skill DMG.</li>
   <li>The additional activation has its own countdown, which starts after the first activation.</li>
   <li>All equipped <strong>Second Class</strong> and <strong>Third Class</strong> rune attributes take effect upon skill activation.</li>
 </ul>
 
-<h4 id="522-skill-activation-on-relay-lightning-element-runes-only" class="lightning">5.2.2 Skill Activation on Relay (Lightning Element Runes Only)</h4>
+<h4 id="512-skill-activation-on-relay-lightning-element-runes-only" class="lightning">5.1.2 Skill Activation on Relay (Lightning Element Runes Only)</h4>
 <ul>
   <li>Immediately triggers the arcana skill once upon your <strong>1st relay</strong> at <strong>50% to 100%</strong> of original DMG.</li>
   <li>All equipped <strong>Second Class</strong> and <strong>Third Class</strong> rune attributes take effect upon skill activation.</li>
   <li>Does not trigger on a 2nd relay.</li>
 </ul>
 
-<h4 id="523-skill-countdown-reduction-water-element-runes-only" class="water">5.2.3 Skill Countdown Reduction (Water Element Runes Only)</h4>
+<h4 id="513-skill-countdown-reduction-water-element-runes-only" class="water">5.1.3 Skill Countdown Reduction (Water Element Runes Only)</h4>
 <ul>
   <li>Reduces the skill’s Boss battle countdown by <strong>5s to 12s</strong>.</li>
   <li>Also shortens the additional activation countdown.</li>
 </ul>
 
-<h4 id="524-skill-upgrade-fire-element-runes-only" class="fire">5.2.4 Skill Upgrade (Fire Element Runes Only)</h4>
+<h4 id="514-skill-upgrade-fire-element-runes-only" class="fire">5.1.4 Skill Upgrade (Fire Element Runes Only)</h4>
 <p>Enhances the active effect of the specific arcana skill:</p>
 <ul>
   <li><strong>Kamaitachi:</strong> Increases Wind Blade release duration by <strong>+0.5s to +1.5s</strong>.</li>
@@ -715,46 +559,46 @@
   <li><strong>Divine Blessing:</strong> Increases invincibility duration by <strong>+0.5s to +1.5s</strong>.</li>
 </ul>
 
-<h3 id="53-second-class-attribute-pool">5.3 Second Class Attribute Pool</h3>
+<h3 id="52-second-class-attribute-pool">5.2 Second Class Attribute Pool</h3>
 <ul>
   <li>Can be obtained from specific element runes only.</li>
   <li>Can be equipped in the Rune Attribute (I) and (II) slots.</li>
   <li>Can be obtained at rune Level 1 and 5 only.</li>
 </ul>
 
-<h4 id="531-permanent-atk-boost-wind-element-runes-only" class="wind">5.3.1 Permanent ATK Boost (Wind Element Runes Only)</h4>
+<h4 id="521-permanent-atk-boost-wind-element-runes-only" class="wind">5.2.1 Permanent ATK Boost (Wind Element Runes Only)</h4>
 <ul>
   <li>Gain a permanent stack of <strong>+50 to +120 ATK</strong> after the first skill activation.</li>
   <li>Can stack with identical attributes. No known cap.</li>
   <li>Additional skill activations do not add more stacks. It only stacks once from the first skill activation.</li>
 </ul>
 
-<h4 id="532-skill-crit-dmg-lightning-element-runes-only" class="lightning">5.3.2 Skill Crit DMG (Lightning Element Runes Only)</h4>
+<h4 id="522-skill-crit-dmg-lightning-element-runes-only" class="lightning">5.2.2 Skill Crit DMG (Lightning Element Runes Only)</h4>
 <ul>
   <li>Gain <strong>+14% to +30%</strong> Crit DMG for the arcana skill.</li>
   <li>Can stack with identical attributes. No known cap.</li>
 </ul>
 
-<h4 id="533-skill-dmg-increase-water-element-runes-only" class="water">5.3.3 Skill DMG Increase (Water Element Runes Only)</h4>
+<h4 id="523-skill-dmg-increase-water-element-runes-only" class="water">5.2.3 Skill DMG Increase (Water Element Runes Only)</h4>
 <ul>
   <li>Gain <strong>+10% to +15%</strong> DMG for the arcana skill.</li>
   <li>Can stack with identical attributes. No known cap.</li>
 </ul>
 
-<h4 id="534-skill-crit-rate-fire-element-runes-only" class="fire">5.3.4 Skill Crit Rate (Fire Element Runes Only)</h4>
+<h4 id="524-skill-crit-rate-fire-element-runes-only" class="fire">5.2.4 Skill Crit Rate (Fire Element Runes Only)</h4>
 <ul>
   <li>Gain <strong>+5% to +25%</strong> Crit Rate for the arcana skill.</li>
   <li>Can stack with identical attributes. No known cap.</li>
 </ul>
 
-<h3 id="54-third-class-attribute-pool">5.4 Third Class Attribute Pool</h3>
+<h3 id="53-third-class-attribute-pool">5.3 Third Class Attribute Pool</h3>
 <ul>
   <li>Can be obtained from all element runes.</li>
   <li>Can be equipped in the Rune Attribute (I) and (II) slots.</li>
   <li>Can be obtained at rune Level 1 and 5 only.</li>
 </ul>
 
-<h4 id="541-temporary-atk-boost-for-10-seconds">5.4.1 Temporary ATK Boost (for 10 seconds)</h4>
+<h4 id="531-temporary-atk-boost-for-10-seconds">5.3.1 Temporary ATK Boost (for 10 seconds)</h4>
 <ul>
   <li><strong>Beast Bull, Blowfish, Divine Blessing:</strong> Gain <strong>+50 to +120 ATK</strong> on skill activation.</li>
   <li><strong>Candle Dragon:</strong> Gain <strong>+6 to +20 ATK</strong> per Fireball hit.</li>
@@ -763,20 +607,20 @@
   <li>Capped at <strong>400 ATK</strong> max for 10 seconds.</li>
 </ul>
 
-<h4 id="542-hp-recovery--instant-heal">5.4.2 HP Recovery / Instant Heal</h4>
+<h4 id="532-hp-recovery--instant-heal">5.3.2 HP Recovery / Instant Heal</h4>
 <ul>
   <li>Recover <strong>+50 to +120 HP</strong> immediately upon activation.</li>
   <li>Can stack with identical attributes.</li>
   <li>Capped at <strong>500 HP</strong> per activation.</li>
 </ul>
 
-<h4 id="543-hp-recovery-speed--regeneration-for-10-seconds">5.4.3 HP Recovery Speed / Regeneration (for 10 seconds)</h4>
+<h4 id="533-hp-recovery-speed--regeneration-for-10-seconds">5.3.3 HP Recovery Speed / Regeneration (for 10 seconds)</h4>
 <ul>
   <li>Recover <strong>+5 to +10 HP/s</strong> continuously for 10 seconds.</li>
   <li>Can stack with identical attributes. No known cap.</li>
 </ul>
 
-<h4 id="544-effect-resistance">5.4.4 Effect Resistance</h4>
+<h4 id="534-effect-resistance">5.3.4 Effect Resistance</h4>
 <ul>
   <li>Gain <strong>+5% to +8%</strong> debuff resistance.</li>
   <li>Can stack with identical attributes. No known cap.</li>
@@ -813,7 +657,7 @@
   <dd>Yes, for the Second and Third Class attributes listed with that rule. No cap is known for most of them. The exceptions are Temporary ATK Boost (capped at 400 ATK max for 10 seconds) and HP Recovery / Instant Heal (capped at 500 HP per activation). See <a href="#5-rune-attributes">Section 5</a>.</dd>
 
   <dt>Q: Do bonus activations add more stacks of Permanent ATK Boost?</dt>
-  <dd>No. See <a href="#531-permanent-atk-boost-wind-element-runes-only">5.3.1</a>.</dd>
+  <dd>No. See <a href="#521-permanent-atk-boost-wind-element-runes-only">5.2.1</a>.</dd>
 
   <dt>Q: How much do I get back from dismantling a rune?</dt>
   <dd>See <a href="#452-dismantle-system-and-refund-rate">4.5.2 Dismantle System and Refund Rate</a>.</dd>
