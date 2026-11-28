@@ -2,6 +2,8 @@
 
 *This guide focuses exclusively on High-Tier Arcana.*
 
+**Element colors:** <span class="wind">Wind</span> · <span class="lightning">Lightning</span> · <span class="water">Water</span> · <span class="fire">Fire</span>
+
 ## Index
 
 1. [Arcana System](#1-arcana-system)
@@ -20,17 +22,17 @@
      * 3.2.2 [Level 5](#322-level-5)
      * 3.2.3 [Level 8](#323-level-8)
 4. [Rune Attribute Classes](#4-rune-attribute-classes)
-   * 4.1 [First Class Attributes](#41-first-class-attributes)
+   * 4.1 [First Class Attribute Pool](#41-first-class-attribute-pool)
      * 4.1.1 [Additional Skill Activation (Wind Element Runes Only)](#411-additional-skill-activation-wind-element-runes-only)
      * 4.1.2 [Skill Activation on Relay (Lightning Element Runes Only)](#412-skill-activation-on-relay-lightning-element-runes-only)
      * 4.1.3 [Skill Countdown Reduction (Water Element Runes Only)](#413-skill-countdown-reduction-water-element-runes-only)
      * 4.1.4 [Skill Upgrade (Fire Element Runes Only)](#414-skill-upgrade-fire-element-runes-only)
-   * 4.2 [Second Class Attributes](#42-second-class-attributes)
+   * 4.2 [Second Class Attribute Pool](#42-second-class-attribute-pool)
      * 4.2.1 [Permanent ATK Boost (Wind Element Runes Only)](#421-permanent-atk-boost-wind-element-runes-only)
      * 4.2.2 [Skill Crit DMG (Lightning Element Runes Only)](#422-skill-crit-dmg-lightning-element-runes-only)
      * 4.2.3 [Skill DMG Increase (Water Element Runes Only)](#423-skill-dmg-increase-water-element-runes-only)
      * 4.2.4 [Skill Crit Rate (Fire Element Runes Only)](#424-skill-crit-rate-fire-element-runes-only)
-   * 4.3 [Third Class Attributes](#43-third-class-attributes)
+   * 4.3 [Third Class Attribute Pool](#43-third-class-attribute-pool)
      * 4.3.1 [Temporary ATK Boost (for 10 seconds)](#431-temporary-atk-boost-for-10-seconds)
      * 4.3.2 [HP Recovery / Instant Heal](#432-hp-recovery--instant-heal)
      * 4.3.3 [HP Recovery Speed / Regeneration (for 10 seconds)](#433-hp-recovery-speed--regeneration-for-10-seconds)
@@ -49,6 +51,13 @@
 
 ## 1. Arcana System
 
+> 💡 **Key Terms**
+> * **Arcana skill:** the special move that triggers during Boss battles.
+> * **Rune set:** the 4 runes (one per element) needed to activate an arcana skill.
+> * **Activation:** the skill firing, once its condition is met and its countdown has finished.
+> * **Tier:** Low, Mid or High. Higher tiers need more specific runes and Ninjas.
+{: .key-terms}
+
 * Arcana is a **battle buff system** built around **4 rune slots**.
 * Equipping a full rune set unlocks a special skill that triggers during Boss battles.
 * A rune set also gives stat bonuses and attribute effects from the runes themselves.
@@ -65,7 +74,7 @@ Arcana is divided into **Low**, **Mid**, and **High** tiers:
 
 * Every arcana skill activates **once per battle** by default, once its countdown has finished and its activation condition is met.
 * Your **1st relay** always restarts the current countdown. A 2nd relay has no effect.
-* Some rune attributes add bonus activations (see [Section 4.1](#41-first-class-attributes)).
+* Some rune attributes add bonus activations (see [Section 4.1](#41-first-class-attribute-pool)).
 * Each arcana skill requires its **rune set** to activate (see [Section 3](#3-runes)).
 * Each skill has its own trigger condition and countdown (see [Section 2](#2-high-tier-arcana-skills)). Both must be fulfilled to activate the skill.
 
@@ -73,25 +82,35 @@ Arcana is divided into **Low**, **Mid**, and **High** tiers:
 
 ## 2. High-Tier Arcana Skills
 
+> 💡 **Key Terms**
+> * **Activation condition:** what has to happen in battle before the skill is allowed to fire (for example, taking no damage).
+> * **Countdown:** a timer that starts when the Boss HP bar appears. The skill fires only when the countdown has finished and the condition is met.
+> * **Relay:** switching to another Ninja during battle. See the FAQ for how it affects countdowns.
+{: .key-terms}
+
 ### 2.1 Kamaitachi (Wind Element Ninja Only)
+{: .wind}
 
 * **Skill Effect:** Summons Kamaitachi to continuously fire **wind blades** at the Boss, then **charges** toward the Boss dealing collision DMG.
 * **Activation Condition:** Use your **main weapon skill twice**.
 * **Countdown:** **55 seconds** in a Boss battle. Weapon uses accumulate during the countdown.
 
 ### 2.2 Beast Bull (Lightning Element Ninja Only)
+{: .lightning}
 
 * **Skill Effect:** Summons Minotaur to charge back and forth once, stop in front of the Ninja to **roar**, and dash away.
 * **Activation Condition:** Activates **automatically** once the countdown finishes.
 * **Countdown:** **60 seconds** in a Boss battle.
 
 ### 2.3 Blowfish (Water Element Ninja Only)
+{: .water}
 
 * **Skill Effect:** Summons Blowfish to **block damage in front for 4s**, then deals **Screen Sweep DMG**. The sweep damage scales based on the damage blocked.
 * **Activation Condition:** Accumulate **500 points of damage taken** from the Boss.
 * **Countdown:** **55 seconds** in a Boss battle. Damage taken accumulates during the countdown.
 
 ### 2.4 Candle Dragon (Fire Element Ninja Only)
+{: .fire}
 
 * **Skill Effect:** Summons Candle Dragon to fire **4 fireballs** forward, then **charges** toward the Boss dealing collision DMG.
 * **Activation Condition:** Play **without taking damage** in a Boss battle.
@@ -107,7 +126,14 @@ Arcana is divided into **Low**, **Mid**, and **High** tiers:
 
 ## 3. Runes
 
-* Every arcana skill requires a rune set to activate. A high-tier rune set is 4 runes of the same arcana skill, one of each element (Wind, Lightning, Water, Fire).
+> 💡 **Key Terms: Stat vs. Attribute**
+> * **Stat:** a plain numeric bonus on the rune, such as ATK or Max HP. Stats always work for the deployed Ninja, even with an incomplete set.
+> * **Attribute:** a special effect that modifies the arcana skill, such as an extra activation or bonus crit. Attributes only work once the skill activates.
+> * **Slot:** a place on the rune for one stat or attribute. Each slot unlocks at a set level (1, 5 or 8). The numerals (I) and (II) just number the slots of each type.
+> * **Roll:** the random result a slot gets when it unlocks.
+{: .key-terms}
+
+* Every arcana skill requires a rune set to activate. A high-tier rune set is 4 runes of the same arcana skill, one of each element (<span class="wind">Wind</span>, <span class="lightning">Lightning</span>, <span class="water">Water</span>, <span class="fire">Fire</span>).
 * An incomplete or incorrect combination of runes will not activate the arcana skill.
 * Rune Attributes (I) and (II) remain ineffective without arcana skill activation.
 * Rune Stats (I) and (II) are effective even if the rune combination is incorrect or incomplete. They work for any Ninja who is deployed at the time, whatever its element.
@@ -116,10 +142,10 @@ Arcana is divided into **Low**, **Mid**, and **High** tiers:
 
 Runes come in 4 elements:
 
-* **Wind**
-* **Lightning**
-* **Water**
-* **Fire**
+* <span class="wind">Wind</span>
+* <span class="lightning">Lightning</span>
+* <span class="water">Water</span>
+* <span class="fire">Fire</span>
 
 Runes can be obtained from a weekly event called **4 Symbols Exploration**.
 
@@ -152,6 +178,14 @@ Runes can be leveled from **Lv. 1 to Lv. 10**. Leveling up runes increases base 
 
 ## 4. Rune Attribute Classes
 
+> 💡 **Key Terms: Class and Pool**
+> * **Class:** a group of attributes (First, Second or Third) that decides which slot and level an attribute can appear in.
+> * **Pool:** the list of attributes a slot can roll from. Some pools are limited by the rune's element.
+> * **Stack:** identical attributes add together.
+>
+> *Example: Attribute (II) draws from the Second and Third Class pools. Second Class is limited to the rune's element, and Third Class is open to every element.*
+{: .key-terms}
+
 ### 4.1 First Class Attribute Pool
 
 * Can be obtained from specific element runes only.
@@ -159,23 +193,27 @@ Runes can be leveled from **Lv. 1 to Lv. 10**. Leveling up runes increases base 
 * Can be obtained at rune Level 1 only.
 
 #### 4.1.1 Additional Skill Activation (Wind Element Runes Only)
+{: .wind}
 
 * Grants **+1 arcana skill activation** per battle at **20% to 50%** of original skill DMG.
 * The additional activation has its own countdown, which starts after the first activation.
 * All equipped **Second Class** and **Third Class** rune attributes take effect upon skill activation.
 
 #### 4.1.2 Skill Activation on Relay (Lightning Element Runes Only)
+{: .lightning}
 
 * Immediately triggers the arcana skill once upon your **1st relay** at **50% to 100%** of original DMG.
 * All equipped **Second Class** and **Third Class** rune attributes take effect upon skill activation.
 * Does not trigger on a 2nd relay.
 
 #### 4.1.3 Skill Countdown Reduction (Water Element Runes Only)
+{: .water}
 
 * Reduces the skill's Boss battle countdown by **5s to 12s**.
 * Also shortens the additional activation countdown.
 
 #### 4.1.4 Skill Upgrade (Fire Element Runes Only)
+{: .fire}
 
 Enhances the active effect of the specific arcana skill:
 
@@ -192,22 +230,26 @@ Enhances the active effect of the specific arcana skill:
 * Can be obtained at rune Level 1 and 5 only.
 
 #### 4.2.1 Permanent ATK Boost (Wind Element Runes Only)
+{: .wind}
 
 * Gain a permanent stack of **+50 to +120 ATK** after the first skill activation.
 * Can stack with identical attributes. No known cap.
 * Additional skill activations do not add more stacks.
 
 #### 4.2.2 Skill Crit DMG (Lightning Element Runes Only)
+{: .lightning}
 
 * Gain **+14% to +30%** Crit DMG for the arcana skill.
 * Can stack with identical attributes. No known cap.
 
 #### 4.2.3 Skill DMG Increase (Water Element Runes Only)
+{: .water}
 
 * Gain **+10% to +15%** DMG for the arcana skill.
 * Can stack with identical attributes. No known cap.
 
 #### 4.2.4 Skill Crit Rate (Fire Element Runes Only)
+{: .fire}
 
 * Gain **+5% to +25%** Crit Rate for the arcana skill.
 * Can stack with identical attributes. No known cap.
